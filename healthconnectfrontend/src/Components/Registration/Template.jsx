@@ -1,25 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import Login_Image from "../../Assets/Login_Image.webp";
-import styled from "styled-components";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import {FcGoogle} from "react-icons/fc"
 
-const VerticalLine = styled.div`
-  height: 100vh;
-  width: 1px;
-  background-color: black;
-  position: absolute;
-  right: 5reml;
-  top: 0;
-`;
 
 const Template = ({ formType }) => {
-  // const { setIsLoggedIn } = useContext(AppContext);
   return (
     <div className="flex w-11/12 max-w-[1160px] py-12 mx-auto justify-evenly items-center">
       <img src={Login_Image} alt="Earth"></img>
-      {/* <VerticalLine /> */}
 
       <div className="border border-gray-400 w-11/12 max-w-[450px] p-7 h-full">
         {formType === "signup" ? <SignupForm /> : <LoginForm />}

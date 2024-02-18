@@ -77,8 +77,8 @@ const LoginForm = () => {
           )}
         </span>
 
-        <Link to="#">
-          <p className="text-xs mt-1 text-blue-400 max-w-max ml-auto font-bold mt-2">Forget Password</p>
+        <Link to="/Forget">
+          <p className="text-xs text-blue-400 max-w-max ml-auto font-bold mt-2">Forget Password</p>
         </Link>
       </label>
 

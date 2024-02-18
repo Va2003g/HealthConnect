@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const [accountType, setaccountType] = useState("student");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -16,7 +17,6 @@ const SignupForm = () => {
     ConfirmPassword: "",
   });
 
-  const [accountType, setaccountType] = useState("student");
   function changeHandler(event) {
     setFormData((prevData) => ({
       ...prevData,
