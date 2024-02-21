@@ -13,8 +13,8 @@ const {login} = require('../controllers/login');
 router.get('/login',login);
 
 //forget password
-const {resetPassword} = require('../controllers/resetPassword');
-router.put('/reset-password',resetPassword);
+const {resetPasswordToken} = require('../controllers/resetPassword');
+router.post('/reset-password-token',resetPasswordToken);
 
 
 module.exports = router;
