@@ -8,7 +8,7 @@ const NavBar = () => {
 
   return (
     <div className="">
-      <div className="flex justify-evenly items-center">
+      <div className="flex justify-between mx-8 my-3 items-center">
         <Link to="/">
           <img
             src={Logo_Image}
@@ -36,22 +36,36 @@ const NavBar = () => {
         <div className="flex mt-2 gap-5">
           {!isLoggedIn && (
             <Link to="/login">
-              <button>Login</button>
+              <div className="w-full h-full px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]">
+                <div className="text-center text-white font-semibold font-['Poppins']">
+                  Log in
+                </div>
+              </div>
             </Link>
           )}
           {!isLoggedIn && (
             <Link to="/signup">
-              <button>SignUp</button>
+              <div className="w-full h-full px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]">
+                <div className="text-center text-white font-semibold font-['Poppins']">
+                  Sign up
+                </div>
+              </div>
             </Link>
           )}
           {isLoggedIn && (
             <Link to="/">
-              <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+              <button
+                onClick={() => setIsLoggedIn(false)}
+                className="w-[76.01px] h-[27.38px] px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-start items-start gap-[5.13px] inline-flex"
+              >
+                <div className="text-center text-white text-[8.20px] font-semibold font-['Poppins']">
+                  Log Out
+                </div>
+              </button>
             </Link>
           )}
         </div>
       </div>
-      <hr className="bg-gray-800 mt-2" />
     </div>
   );
 };
