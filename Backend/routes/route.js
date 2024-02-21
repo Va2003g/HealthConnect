@@ -12,5 +12,9 @@ router.post('/signup',signUp.signup);
 const {login} = require('../controllers/login');
 router.get('/login',login);
 
+//forget password
+const {resetPassword} = require('../controllers/resetPassword');
+router.put('/reset-password',resetPassword);
+
 
 module.exports = router;
