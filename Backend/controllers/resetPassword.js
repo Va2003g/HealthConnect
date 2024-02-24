@@ -12,7 +12,7 @@ exports.resetPasswordToken = async (req,res)=>{
             })
         }
 
-        await sendMail(email,'Testing Mail Functionality',`Hi ${findUser.name}, This is mail from HealthConnect to check mail functionality..`);
+        await sendMail(email,'Reset Password',`Hi ${findUser.name}, Kindly click the link to reset your password.`);
 
         return res.status(200).json({
             success:true,
