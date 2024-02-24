@@ -28,7 +28,7 @@ const Book_Appointement = () => {
           with your health consultation
         </div>
 
-        <Link to="#">
+        <Link to="/Book_Appointement_State">
           <button className="px-4 py-2 bg-gradient-to-r from-teal-300 to-sky-700 rounded-full my-5">
             <div className="text-center text-white text-xl font-semibold font-['Poppins']">
               Book Appointement
