@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const sendMail = require('../utilities/mailSender');
-exports.resetPasswordToken = async (req,res)=>{
+const bcrypt = require('bcrypt');
+exports.resetPasswordToken = async (req,res)=>
+{
     try{
         const {email} = req.body;
         const findUser = await User.findOne({email});
@@ -11,8 +13,12 @@ exports.resetPasswordToken = async (req,res)=>{
                 message:"You are not registered with us."
             })
         }
+        let time = Date.now() + 1*60*1000;
+        let id = findUser._id + '.' + time;
+        console.log(id);
+        const url = `http:localhost:3000/reset-password/${id}`;
 
-        await sendMail(email,'Reset Password',`Hi ${findUser.name}, Kindly click the link to reset your password.`);
+        await sendMail(email,'Reset Password',`Hi ${findUser.name}, Kindly click this link to reset your password.\n ${url}`);
 
         return res.status(200).json({
             success:true,
@@ -20,12 +26,75 @@ exports.resetPasswordToken = async (req,res)=>{
         })
     }catch(error)
     {
-        res.status(500).json({
+        return res.status(500).json({
             success:false,
-            message:"Error is reseting the password. Try after some time."
+            message:"Error in reset your password. Try after some time."
         })
     }
 
 }
 
 //resetPassword
+
+exports.resetPassword = async (req,res)=>
+{
+    try{
+        const {password,confirmPassword,id} = req.body;
+        if(password!=confirmPassword)
+        {
+            return res.status(400).json({
+                success:false,
+                message:"Passwords do not match."
+            })
+        }
+
+        let temp = id.split('.');
+        let time = temp[1];
+        let newId = temp[0];
+        console.log(id);
+        console.log(time);
+        let checkUser = await User.findById(newId);
+        if(!checkUser)
+        {
+            return res.status(400).json({
+                success:false,
+                message:"Invalid Link"
+            })
+        }
+
+        if(Date.now() > time)
+        {
+            return res.status(400).json({
+                success:false,
+                message:"Link Expired!!"
+            })
+        }
+        let encryptedPassword;
+        try
+        {
+            encryptedPassword = await bcrypt.hash(password,10);
+        }
+        catch(err)
+        {
+            console.log(error);
+            return res.status(500).json({
+                success:false,
+                message:"Error in hashing password"
+            })
+        }
+
+        await User.findByIdAndUpdate(newId,{password:encryptedPassword});
+
+        return res.status(200).json({
+            success:true,
+            message:"Successfully Reset Your Password. Kindly Login Again!!"
+        })
+
+    }catch (err){
+        console.log(err);
+        return res.status(500).json({
+            success:false,
+            message:"Unable to reset the password. Try again after some time."
+        })
+    }
+}

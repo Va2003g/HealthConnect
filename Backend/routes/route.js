@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const hospital = require('../models/Hospital')
+// const hospital = require('../models/Hospital')
+const Hospital = require('../models/Hospital');
 //landing route
 router.get('/',(req,res)=>res.send(`<h1>Health Connect Backend</h1>`))
 
@@ -13,9 +14,9 @@ const {login} = require('../controllers/login');
 router.get('/login',login);
 
 //forget password
-const {resetPasswordToken} = require('../controllers/resetPassword');
-const Hospital = require('../models/Hospital');
+const {resetPasswordToken,resetPassword} = require('../controllers/resetPassword');
 router.post('/reset-password-token',resetPasswordToken);
+router.post('/reset-password',resetPassword);
 
 //getting hospital data for checking
 router.get('/get-hospital-data', async (req,res)=>{
@@ -29,7 +30,6 @@ router.get('/get-hospital-data', async (req,res)=>{
             message:"Failed",
         });
     }
-    // 
 })
 
 module.exports = router;
