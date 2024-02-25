@@ -1,34 +1,13 @@
 const express = require('express');
 const multer = require('multer');
 const exceljs = require('exceljs');
+const Hospital = require('../models/Hospital');
 const mongoose = require('mongoose');
 
 const app = express();
 const port = 3001;
-const mongoUrl = 'mongodb+srv://vanshgupta4661:0Z9BYdtSSDLginN3@cluster0.mppib6t.mongodb.net/HospitalDataBase'; // Update with your MongoDB connection string and database name
+const mongoUrl = 'mongodb+srv://vanshgupta4661:0Z9BYdtSSDLginN3@cluster0.mppib6t.mongodb.net/UsersDataBase';
 
-// mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-// .then(()=>console.log("Connection successfull"))
-// .catch((err)=>{
-//     console.log(err);
-//     console.log("Connection failed to DB");
-// })
-
-const hospitalSchema = new mongoose.Schema({
-    Sr_No: Number,
-    Location_Coordinates: String,
-    Location: String,
-    Hospital_Name: String,
-    State: String,
-    District: String,
-    Pincode: String,
-    Telephone: String,
-    State_ID: String,
-    District_ID: String,
-});
-  
-const Hospital = mongoose.model('Hospital', hospitalSchema);
-  
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -64,10 +43,8 @@ app.post('/upload', upload.single('file'), async (req, res) => {
           State_ID: row.getCell(9).value,
           District_ID: row.getCell(10).value,
         };
-      
         data.push(rowData);
       });
-
     await Hospital.insertMany(data);
     res.json({ message: 'File uploaded and data saved to MongoDB' });
   } catch (error) {
