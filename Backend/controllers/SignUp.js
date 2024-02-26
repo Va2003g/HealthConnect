@@ -4,10 +4,19 @@ const bcrypt = require('bcrypt');
 exports.signup = async(req,res) => {
     try{
         //fetching data from request body
-        const {name , email, password, role}= req.body;
-        console.log(name,email,password,role);
+        const {FirstName, LastName, Email, Password, ConfirmPassword, accountType}= req.body;
+        const name = FirstName + " " + LastName;
+        console.log(name,Email,Password,ConfirmPassword,accountType);
+        
+        if(Password!=ConfirmPassword)
+        {
+            return res.status(400).json({
+                success:false,
+                message:"Passwords do not match"
+            })
+        }
 
-        const userFind = await User.findOne({email});
+        const userFind = await User.findOne({Email});
         if(userFind)
         {
             return res.status(400).json({
@@ -20,7 +29,7 @@ exports.signup = async(req,res) => {
         let encryptedPassword;
 
         try{
-            encryptedPassword = await bcrypt.hash(password,10);
+            encryptedPassword = await bcrypt.hash(Password,10);
         }catch(err)
         {
             return res.status(500).json({
@@ -31,9 +40,9 @@ exports.signup = async(req,res) => {
 
         const newUser = await User.create({
             name,
-            email,
+            email:Email,
             password:encryptedPassword,
-            role,
+            role:accountType,
         });
 
         return res.status(200).json({
