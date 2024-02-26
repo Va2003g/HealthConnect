@@ -6,7 +6,7 @@ exports.signup = async(req,res) => {
         //fetching data from request body
         const {FirstName, LastName, Email, Password, ConfirmPassword, accountType}= req.body;
         const name = FirstName + " " + LastName;
-        console.log(name,Email,Password,ConfirmPassword,accountType);
+        console.log(Email);
         
         if(Password!=ConfirmPassword)
         {
@@ -16,7 +16,8 @@ exports.signup = async(req,res) => {
             })
         }
 
-        const userFind = await User.findOne({Email});
+        const userFind = await User.findOne({email:Email});
+        console.log(userFind);
         if(userFind)
         {
             return res.status(400).json({
