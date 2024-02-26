@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
-  const [accountType, setaccountType] = useState("student");
+  const [accountType, setaccountType] = useState("Patient");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -15,6 +15,7 @@ const SignupForm = () => {
     Email: "",
     Password: "",
     ConfirmPassword: "",
+    accountType,
   });
 
   function changeHandler(event) {
@@ -24,9 +25,25 @@ const SignupForm = () => {
     }));
   }
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
+    console.log(formData);
     event.preventDefault();
-    setIsLoggedIn(true);
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/signup`,{
+        method:"POST",
+        headers:{
+          "content-Type":"application/json"
+        },
+        body:JSON.stringify(formData),
+      }
+    )
+    console.log(response);
+
+    if(response.ok)
+    {
+      setIsLoggedIn(true);
+      navigate('/');
+    }
   }
 
   useEffect(() => {
@@ -40,21 +57,21 @@ const SignupForm = () => {
     <div>
       <div className="flex p-1 gap-x-1 rounded-full max-w-max border border-gray-400">
         <button
-          onClick={() => setaccountType("student")}
+          onClick={() => setaccountType("Patient")}
           className={`${
-            accountType === "student"
+            accountType === "Patient"
               ? "bg-blue-500 text-white"
               : "bg-transparent"
           } py-2 px-5 rounded-full transition-all duration-200`}
         >
-          Student
+          Patient
         </button>
-        <button onClick={() => setaccountType("instructor")}
+        <button onClick={() => setaccountType("Doctor")}
         className={`${
-            accountType === "instructor"
+            accountType === "Doctor"
               ? "bg-blue-500 text-white"
               : "bg-transparent"
-          } py-2 px-5 rounded-full transition-all duration-200`}>Instructor</button>
+          } py-2 px-5 rounded-full transition-all duration-200`}>Doctor</button>
       </div>
 
       <form onSubmit={submitHandler}>
