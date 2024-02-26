@@ -56,9 +56,9 @@ const NavBar = () => {
             <Link to="/">
               <button
                 onClick={() => setIsLoggedIn(false)}
-                className="w-[76.01px] h-[27.38px] px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-start items-start gap-[5.13px] inline-flex"
+                className=" w-full h-full px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-start items-start gap-[5.13px] inline-flex"
               >
-                <div className="text-center text-white text-[8.20px] font-semibold font-['Poppins']">
+                <div className="text-center text-white font-semibold font-['Poppins']">
                   Log Out
                 </div>
               </button>
