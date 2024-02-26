@@ -11,12 +11,12 @@ router.post('/signup',signUp.signup);
 
 //login handlers
 const {login} = require('../controllers/login');
-router.get('/login',login);
+router.post('/login',login);
 
 //forget password
 const {resetPasswordToken,resetPassword} = require('../controllers/resetPassword');
 router.post('/reset-password-token',resetPasswordToken);
-router.post('/reset-password',resetPassword);
+router.put('/reset-password',resetPassword);
 
 //getting hospital data for checking
 router.get('/get-hospital-data', async (req,res)=>{

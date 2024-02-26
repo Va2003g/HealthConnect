@@ -38,7 +38,9 @@ exports.login = async(req,res)=>{
             });
 
             const options = {
-                expires: new Date(Date.now() + 3*24*60*60*1000 /*time in millisecond*/)
+                expires: new Date(Date.now() + 3*24*60*60*1000 /*time in millisecond*/),
+                HttpOnly:true,
+                secure:false,
             }
 
             return res.cookie("authToken",authToken,options).status(200).json({
