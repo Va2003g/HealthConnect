@@ -1,7 +1,7 @@
 import React from "react";
 import { FcApproval, FcPlus, FcPlanner, FcComments } from "react-icons/fc";
 import Book_Appointement_State_Data from "./Book_Appointement_State_Data";
-import Book_Appointement_District_Data from "./Book_Appointement_State_Data";
+import Book_Appointement_District_Data from "./Book_Appointement_District_Data";
 
 const Book_Appointement_Template = ({ type }) => {
   return (
@@ -38,13 +38,11 @@ const Book_Appointement_Template = ({ type }) => {
           </div>
         </div>
       </div>
-      <div className="w-[50%] h-[80%] shadow-2xl mr-[6rem] my-[4rem] ">
-      {type === "State" ? (
+      <div className="w-[50%] h-[80%] shadow-2xl mr-[6rem] my-[4rem]">
+        {type === "State" ? (
           <Book_Appointement_State_Data />
-        ) : type === "District" ? (
-          <Book_Appointement_District_Data />
         ) : (
-          <div>Other case component goes here</div>
+          <Book_Appointement_District_Data />
         )}
       </div>
     </div>

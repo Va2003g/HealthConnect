@@ -1,13 +1,17 @@
 import React from "react";
 import StateData from "../../../Assets/states-and-districts.json";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../../Context/AppContext";
 
 const Book_Appointement_State_Data = () => {
+  const {setState} = useContext(AppContext);
   const stateNames = StateData.states.map((state) => state.state);
 
   const navigate = useNavigate();
   const handleClickChange = (name) => {
-    navigate("/districts", { state: { stateName: name } });
+    setState(name);
+    navigate("/Book_Appointement_District");
   };
 
   return (
