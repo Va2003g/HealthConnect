@@ -31,8 +31,16 @@ router.put('/reset-password',resetPassword);
 //         });
 //     }
 // });
-const {authentication} = require('../middleware/authentication');
+const {authentication,isPatient,isDoctor} = require('../middleware/authentication');
 const {getHospitalData} = require('../controllers/getHospitalData');
-router.get('/get-hospital-data',authentication,getHospitalData);
+// router.get('/get-hospital-data',authentication,getHospitalData);
+router.get('/get-hospital-data',getHospitalData);
+
+router.get('/test',authentication,isPatient,(req,res)=>{
+    return res.status(200).json({
+        success:true,
+        message:"Welcome to protected route for Patient"
+    })
+})
 
 module.exports = router;
