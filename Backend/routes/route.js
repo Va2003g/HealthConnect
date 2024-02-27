@@ -31,7 +31,8 @@ router.put('/reset-password',resetPassword);
 //         });
 //     }
 // });
+const {authentication} = require('../middleware/authentication');
 const {getHospitalData} = require('../controllers/getHospitalData');
-router.get('/get-hospital-data',getHospitalData);
+router.get('/get-hospital-data',authentication,getHospitalData);
 
 module.exports = router;
