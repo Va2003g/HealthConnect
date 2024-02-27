@@ -19,17 +19,19 @@ router.post('/reset-password-token',resetPasswordToken);
 router.put('/reset-password',resetPassword);
 
 //getting hospital data for checking
-router.get('/get-hospital-data', async (req,res)=>{
-    try{
-        let data = await Hospital.find({State:"Punjab"});
-        res.status(200).json(data);
-    }catch(err)
-    {
-        console.log(err);
-        res.status(500).send({
-            message:"Failed",
-        });
-    }
-})
+// router.get('/get-hospital-data', async (req,res)=>{
+//     try{
+//         let data = await Hospital.find({State:"Punjab"});
+//         res.status(200).json(data);
+//     }catch(err)
+//     {
+//         console.log(err);
+//         res.status(500).send({
+//             message:"Failed",
+//         });
+//     }
+// });
+const {getHospitalData} = require('../controllers/getHospitalData');
+router.get('/get-hospital-data',getHospitalData);
 
 module.exports = router;
