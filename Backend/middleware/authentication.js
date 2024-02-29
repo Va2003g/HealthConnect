@@ -25,7 +25,7 @@ exports.authentication = (req,res,next)=>{
             console.log(err);
             return res.status(400).json({
                 success:false,
-                messsage:"Token is not Valid"
+                message:"Token is not Valid"
             })
         }
     }catch(err)
@@ -43,7 +43,7 @@ exports.authentication = (req,res,next)=>{
 exports.isPatient = (req,res,next) =>{
 
     try{
-
+        console.log(req.user);
         if(req.user.role!='Patient')
         {
             return res.status(400).json({
