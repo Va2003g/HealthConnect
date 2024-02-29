@@ -1,18 +1,33 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Verify_Otp from "./Verify_Otp";
+// import Verify_Otp from "./Verify_Otp";
+// import { connect } from "http2";
 
 const Forget = () => {
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   function changeHandler(event) {
-    setemail(event.target.value);
+    setEmail(event.target.value);
   }
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
-    navigate("/Verify_Otp", { state: { email } });
+    // navigate("/Verify_Otp", { state: { email } });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/reset-password-token`,{
+        method:"POST",
+        headers:{
+          "content-type":"application/json"
+        },
+        body:JSON.stringify({email}),
+      }
+    )
+    console.log(response);
+    if(response.ok)
+    {
+       console.log("Email Send Succesfully");
+    }
   }
 
   return (
@@ -41,7 +56,7 @@ const Forget = () => {
                 className="rounded-[0.2rem] w-full p-[4px] border border-gray-400"
               />
               <button className="bg-blue-500 rounded-[8px] font-medium text-white px-[12px] py-[8px] mt-4 w-full">
-                Send OTP
+                Send Link
               </button>
             </label>
           </form>
