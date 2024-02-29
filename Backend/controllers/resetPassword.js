@@ -5,10 +5,12 @@ exports.resetPasswordToken = async (req,res)=>
 {
     try{
         const {email} = req.body;
+        console.log(email);
+        // console.log(req);
         const findUser = await User.findOne({email});
         if(!findUser)
         {
-            res.status(400).json({
+            return res.status(400).json({
                 success:false,
                 message:"You are not registered with us."
             })
@@ -16,10 +18,9 @@ exports.resetPasswordToken = async (req,res)=>
         let time = Date.now() + 1*60*1000;
         let id = findUser._id + '.' + time;
         console.log(id);
-        const url = `http:localhost:3000/reset-password/${id}`;
-
-        await sendMail(email,'Reset Password',`Hi ${findUser.name}, Kindly click this link to reset your password.\n ${url}`);
-
+        const url = `http://localhost:3000/Reset_Password/${id}`;
+        const emailBody = `Hi ${findUser.name},<br><br>Kindly click this <a href="${url}">link</a> to reset your password.`;
+        await sendMail(email, 'Reset Password', emailBody);
         return res.status(200).json({
             success:true,
             message:"Email send successfully"
@@ -40,6 +41,7 @@ exports.resetPassword = async (req,res)=>
 {
     try{
         const {password,confirmPassword,id} = req.body;
+        console.log(password,confirmPassword,id);
         if(password!=confirmPassword)
         {
             return res.status(400).json({

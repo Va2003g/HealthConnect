@@ -6,7 +6,7 @@ import Login from "./Pages/Registration/Login";
 import Signup from "./Pages/Registration/Signup";
 import { Routes, Route } from "react-router-dom";
 import Forget from "./Pages/Registration/Forget";
-import Verify_Otp from "./Pages/Registration/Verify_Otp";
+import Reset_Password from "./Pages/Registration/Reset_Password";
 import Book_Appointement_State from "./Pages/Book_Appointement/Book_Appointement_State";
 import Book_Appointement_District from "./Pages/Book_Appointement/Book_Appointement_District";
 import Book_Appointement_Hospital from "./Pages/Book_Appointement/Book_Appointement_Hospital";
@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Forget" element={<Forget />} />
-        <Route path="/Verify_Otp" element={<Verify_Otp />} />
+        <Route path="/Reset_Password/:id" element={<Reset_Password />} />{/* <Route path="/Verify_Otp" element={<Verify_Otp />} /> */}
         <Route
           path="/Book_Appointement_State"
           element={<Book_Appointement_State />}
