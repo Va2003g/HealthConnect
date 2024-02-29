@@ -69,7 +69,7 @@ const Latest_News = () => {
         {newsToShow.length > 0 && newsToShow[currentIndex].urlToImage && (
           <img
             src={newsToShow[currentIndex].urlToImage}
-            alt="Image description"
+            alt="description"
             className="w-[20rem] h-[15rem] rounded-2xl"
           />
         )}

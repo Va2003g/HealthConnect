@@ -9,6 +9,7 @@ import Forget from "./Pages/Registration/Forget";
 import Verify_Otp from "./Pages/Registration/Verify_Otp";
 import Book_Appointement_State from "./Pages/Book_Appointement/Book_Appointement_State";
 import Book_Appointement_District from "./Pages/Book_Appointement/Book_Appointement_District";
+import Book_Appointement_Hospital from "./Pages/Book_Appointement/Book_Appointement_Hospital";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
         <Route
           path="/Book_Appointement_District"
           element={<Book_Appointement_District />}
+        ></Route>
+        <Route
+          path="/Book_Appointement_Hospital"
+          element={<Book_Appointement_Hospital />}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>
