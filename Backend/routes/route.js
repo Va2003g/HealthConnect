@@ -31,6 +31,7 @@ router.put('/reset-password',resetPassword);
 //         });
 //     }
 // });
+
 const {getHospitalData} = require('../controllers/getHospitalData');
 router.get('/get-hospital-data',getHospitalData);
 
