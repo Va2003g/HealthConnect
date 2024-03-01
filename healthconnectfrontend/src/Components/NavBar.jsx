@@ -5,6 +5,7 @@ import { AppContext } from "./Context/AppContext";
 
 const NavBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const { name, setName } = useContext(AppContext);
 
   return (
     <div className="">
@@ -60,6 +61,17 @@ const NavBar = () => {
               >
                 <div className="text-center text-white font-semibold font-['Poppins']">
                   Log Out
+                </div>
+              </button>
+            </Link>
+          )}
+          {isLoggedIn && (
+            <Link to="/">
+              <button
+                className=" w-full h-full px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-start items-start gap-[5.13px] inline-flex"
+              >
+                <div className="text-center text-white font-semibold font-['Poppins']">
+                  {name}
                 </div>
               </button>
             </Link>
