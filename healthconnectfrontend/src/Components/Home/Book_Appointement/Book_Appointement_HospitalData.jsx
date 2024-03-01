@@ -8,7 +8,7 @@ const Book_Appointement_HospitalData = () => {
   async function getHospital() {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/get-hospital-data?state=Haryana&district=Sirsa`
+        `${process.env.REACT_APP_BACKEND_URL}/get-hospital-data?state=${state}&district=${district}`
       );
       const hospitalData = await response.json();
       setData(hospitalData.Data); // Only setting the array of hospitals
