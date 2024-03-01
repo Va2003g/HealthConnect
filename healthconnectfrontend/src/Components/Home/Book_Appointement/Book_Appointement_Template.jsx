@@ -4,8 +4,18 @@ import Book_Appointement_State_Data from "./Book_Appointement_State_Data";
 import Book_Appointement_District_Data from "./Book_Appointement_District_Data";
 import Book_Appointement_Hospital from "../../../Pages/Book_Appointement/Book_Appointement_Hospital";
 import Book_Appointement_HospitalData from "./Book_Appointement_HospitalData";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Book_Appointement_Template = ({ type }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const prevhandler = () => {
+    navigate(-1);
+  };
+  const starthandler = () => {
+    navigate("/Book_Appointement_State");
+  };
+
   return (
     <div className="flex gap-[5%]">
       <div className="h-[70%] w-[45%] shadow-2xl ml-[6rem] my-[5rem] py-[2rem]">
@@ -40,14 +50,38 @@ const Book_Appointement_Template = ({ type }) => {
           </div>
         </div>
       </div>
-      <div className="w-[50%] h-[80%] shadow-2xl mr-[6rem] my-[4rem]">
-        {type === "State" ? (
-          <Book_Appointement_State_Data />
-        ) : type === "District" ? (
-          <Book_Appointement_District_Data />
-        ) : type === "Hospital" ? (
-          <Book_Appointement_HospitalData />
-        ) : null}
+      <div className="w-[50%] mr-[6rem] mt-[4rem]">
+        <div className="h-[80%] shadow-2xl mb-[2rem]">
+          {type === "State" ? (
+            <Book_Appointement_State_Data />
+          ) : type === "District" ? (
+            <Book_Appointement_District_Data />
+          ) : type === "Hospital" ? (
+            <Book_Appointement_HospitalData />
+          ) : null}
+        </div>
+        <div className="flex gap-5 mb-[2rem] justify-evenly">
+          {location.pathname !== "/Book_Appointement_State" && (
+            <>
+              <div className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center">
+                <button
+                  onClick={prevhandler}
+                  className="text-center text-white font-semibold font-['Poppins']"
+                >
+                  Previous
+                </button>
+              </div>
+              <div className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center">
+                <button
+                  onClick={starthandler}
+                  className="text-center text-white font-semibold font-['Poppins']"
+                >
+                  Start Over
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
