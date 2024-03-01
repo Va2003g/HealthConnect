@@ -10,6 +10,7 @@ import Reset_Password from "./Pages/Registration/Reset_Password";
 import Book_Appointement_State from "./Pages/Book_Appointement/Book_Appointement_State";
 import Book_Appointement_District from "./Pages/Book_Appointement/Book_Appointement_District";
 import Book_Appointement_Hospital from "./Pages/Book_Appointement/Book_Appointement_Hospital";
+import Hospital_Near_ME from "./Components/Home/Special Services/Special Services Components/Hospital_Near_Me";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Forget" element={<Forget />} />
-        <Route path="/Reset_Password/:id" element={<Reset_Password />} />{/* <Route path="/Verify_Otp" element={<Verify_Otp />} /> */}
+        <Route path="/Reset_Password/:id" element={<Reset_Password />} />
+        {/* <Route path="/Verify_Otp" element={<Verify_Otp />} /> */}
+        <Route path="/Hospital_Near_Me" element={<Hospital_Near_ME />}></Route>
         <Route
           path="/Book_Appointement_State"
           element={<Book_Appointement_State />}

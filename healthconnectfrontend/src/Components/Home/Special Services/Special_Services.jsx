@@ -7,6 +7,7 @@ import {
   FaHospital,
 } from "react-icons/fa6";
 import { SlCalender } from "react-icons/sl";
+import { Link } from "react-router-dom";
 
 const Special_Services = () => {
   return (
@@ -50,17 +51,21 @@ const Special_Services = () => {
                 </div>
                 <div>Lab Reports</div>
               </div>
-              <div>
-                <div className="w-full h-full bg-gradient-to-b from-teal-300 to-sky-700 rounded-[25%] flex justify-center items-center mb-4">
-                  <FaHospital size={48} color="white" />
+              <Link to="/Hospital_Near_Me">
+                <div>
+                  <div className="w-full h-full bg-gradient-to-b from-teal-300 to-sky-700 rounded-[25%] flex justify-center items-center mb-4">
+                    <FaHospital size={48} color="white" />
+                  </div>
+                  <div>Hospital Near Me</div>
                 </div>
-                <div>Hospital Near Me</div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      <div className="text-5xl ml-[5rem] font-semibold text-sky-700">Latest News</div>
+      <div className="text-5xl ml-[5rem] font-semibold text-sky-700">
+        Latest News
+      </div>
     </div>
   );
 };
