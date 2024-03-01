@@ -34,8 +34,14 @@ router.put('/reset-password',resetPassword);
 
 const {authentication,isPatient,isDoctor} = require('../middleware/authentication');
 const {getHospitalData} = require('../controllers/getHospitalData');
+const { getUniqueStates } = require('../controllers/getStates');
+const { getDistrict } = require('../controllers/getDistrict');
+
+
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get('/get-hospital-data',getHospitalData);
+router.get('/get-state',getUniqueStates);
+router.get('/get-district',getDistrict)
 
 router.get('/test',authentication,isPatient,(req,res)=>{
     return res.status(200).json({
