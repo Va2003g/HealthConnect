@@ -6,6 +6,7 @@ function AppContextProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [state, setState] = useState("");
   const [district , setDistrict] = useState("");
+  const [name,setName] = useState("");
 
   const value = {
     isLoggedIn,
@@ -13,7 +14,9 @@ function AppContextProvider({ children }) {
     state,
     setState,
     district,
-    setDistrict
+    setDistrict,
+    name,
+    setName
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

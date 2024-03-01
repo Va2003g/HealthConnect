@@ -5,6 +5,7 @@ import { AppContext } from "../Context/AppContext";
 
 const LoginForm = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const {name,setName} = useContext(AppContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -34,8 +35,13 @@ const LoginForm = () => {
       }
     )
     console.log(response);
+    
+
     if(response.ok)
     {
+      const {name} = await response.json();
+      console.log(name);
+      setName(name);
       setIsLoggedIn(true);
       navigate("/")
     }
