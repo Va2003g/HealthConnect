@@ -4,7 +4,7 @@ exports.getHospitalData = async (req,res)=>
 {
     try
     {
-        const {state,district} = req.body;
+        const {state,district} = req.query;
 
         if(!state || !district)
         {
