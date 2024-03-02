@@ -1,9 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackGround_img from "../../Assets/Book_Appointement_BackGround.jpeg";
 import ForeGround_img from "../../Assets/Book_Appointement_ForeGround.jpeg";
+import { useContext } from "react";
+import { AppContext } from "../Context/AppContext";
 
 const Book_Appointement = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AppContext);
+  const BookHandler = () => {
+    {
+      isLoggedIn ? navigate("/Book_Appointement_type") : navigate("/login");
+    }
+  };
   return (
     <div className="flex justify-between mt-6">
       <div className="mx-[13rem] my-[3rem]">
@@ -28,13 +37,14 @@ const Book_Appointement = () => {
           with your health consultation
         </div>
 
-        <Link to="/Book_Appointement_State">
-          <button className="px-4 py-2 bg-gradient-to-r from-teal-300 to-sky-700 rounded-full my-5">
-            <div className="text-center text-white text-xl font-semibold font-['Poppins']">
-              Book Appointement
-            </div>
-          </button>
-        </Link>
+        <button
+          onClick={BookHandler}
+          className="px-4 py-2 bg-gradient-to-r from-teal-300 to-sky-700 rounded-full my-5"
+        >
+          <div className="text-center text-white text-xl font-semibold font-['Poppins']">
+            Book Appointement
+          </div>
+        </button>
 
         <div className="flex gap-[4rem]">
           <div>

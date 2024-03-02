@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Book_Appointement_HospitalData = () => {
   const { state, district } = useContext(AppContext);
+  const { setHospital } = useContext(AppContext);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -29,9 +31,16 @@ const Book_Appointement_HospitalData = () => {
     fetchData();
   }, [state, district]);
 
-  useEffect(() =>{
+  useEffect(() => {
     console.log(data);
-  },[data])
+  }, [data]);
+
+  const navigate = useNavigate();
+  const handleClickChange = (name) => {
+    setHospital(name);
+    console.log(name);
+    navigate("/Book_Appointement_Depart");
+  };
 
   return (
     <div className="h-[73vh] overflow-scroll">
@@ -45,6 +54,7 @@ const Book_Appointement_HospitalData = () => {
               <button
                 key={index}
                 className="w-[47%] text-center m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:"
+                onClick={() => handleClickChange(hospital?.Hospital_Name)}
               >
                 {hospital?.Hospital_Name}
               </button>

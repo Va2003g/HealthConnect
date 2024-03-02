@@ -11,6 +11,9 @@ import Book_Appointement_State from "./Pages/Book_Appointement/Book_Appointement
 import Book_Appointement_District from "./Pages/Book_Appointement/Book_Appointement_District";
 import Book_Appointement_Hospital from "./Pages/Book_Appointement/Book_Appointement_Hospital";
 import Hospital_Near_ME from "./Components/Home/Special Services/Special Services Components/Hospital_Near_Me";
+import Book_Appointement_SelectType from "./Components/Home/Book_Appointement/Book_Appointement_SelectType";
+import Book_Appointement_Type from "./Pages/Book_Appointement/Book_Appointement_Type";
+import Book_Appointement_Departement from "./Pages/Book_Appointement/Book_Appointement_Departement";
 
 function App() {
   return (
@@ -35,6 +38,14 @@ function App() {
         <Route
           path="/Book_Appointement_Hospital"
           element={<Book_Appointement_Hospital />}
+        ></Route>
+        <Route
+          path="/Book_Appointement_type"
+          element={<Book_Appointement_Type/>}
+        ></Route>
+        <Route
+          path="/Book_Appointement_Depart"
+          element={<Book_Appointement_Departement/>}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>

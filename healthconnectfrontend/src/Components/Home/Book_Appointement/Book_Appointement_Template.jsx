@@ -5,6 +5,8 @@ import Book_Appointement_District_Data from "./Book_Appointement_District_Data";
 import Book_Appointement_Hospital from "../../../Pages/Book_Appointement/Book_Appointement_Hospital";
 import Book_Appointement_HospitalData from "./Book_Appointement_HospitalData";
 import { useLocation, useNavigate } from "react-router-dom";
+import Book_Appointement_SelectType from "./Book_Appointement_SelectType";
+import Book_Appointement_DepartType from "./Book_Appointement_DepartType";
 
 const Book_Appointement_Template = ({ type }) => {
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const Book_Appointement_Template = ({ type }) => {
     navigate(-1);
   };
   const starthandler = () => {
-    navigate("/Book_Appointement_State");
+    navigate("/Book_Appointement_type");
   };
 
   return (
@@ -24,6 +26,10 @@ const Book_Appointement_Template = ({ type }) => {
           Follow these Simple steps to Book Your Appointement Online
         </div>
         <div className="mx-6 flex flex-col gap-y-8">
+          <div className="flex items-center gap-1 text-xl">
+            <FcApproval />
+            Select Type
+          </div>
           <div className="flex items-center gap-1 text-xl">
             <FcApproval />
             Select State
@@ -58,10 +64,14 @@ const Book_Appointement_Template = ({ type }) => {
             <Book_Appointement_District_Data />
           ) : type === "Hospital" ? (
             <Book_Appointement_HospitalData />
+          ) : type === "Select_Type" ? (
+            <Book_Appointement_SelectType />
+          ) : type === "Depart" ? (
+            <Book_Appointement_DepartType />
           ) : null}
         </div>
         <div className="flex gap-5 mb-[2rem] justify-evenly">
-          {location.pathname !== "/Book_Appointement_State" && (
+          {location.pathname !== "/Book_Appointement_Type" && (
             <>
               <div className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center">
                 <button
