@@ -43,12 +43,14 @@ const Book_Appointement_HospitalData = () => {
   };
 
   return (
-    <div className="h-[73vh] overflow-scroll">
+    <div className="h-[73vh] overflow-scroll ">
       <div className="text-2xl text-center">Select Hospital</div>
       <div>
         {
           loading ? (
-            <SpinningCircles color="#4299e1" />
+            <div className=" w-100 h-[60vh] flex justify-center items-center">
+              <SpinningCircles color="#4299e1" fill="#4299e1"/>
+            </div>
           ) : data && data.length > 0 ? (
             data.map((hospital, index) => (
               <button

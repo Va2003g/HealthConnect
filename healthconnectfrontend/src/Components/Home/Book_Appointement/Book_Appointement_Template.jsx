@@ -73,17 +73,15 @@ const Book_Appointement_Template = ({ type }) => {
         <div className="flex gap-5 mb-[2rem] justify-evenly">
           {location.pathname !== "/Book_Appointement_Type" && (
             <>
-              <div className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center">
+              <div onClick={prevhandler} className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center cursor-pointer">
                 <button
-                  onClick={prevhandler}
                   className="text-center text-white font-semibold font-['Poppins']"
                 >
                   Previous
                 </button>
               </div>
-              <div className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center">
+              <div onClick={starthandler} className=" w-[35%] flex px-7 py-4 bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow justify-center items-center cursor-pointer">
                 <button
-                  onClick={starthandler}
                   className="text-center text-white font-semibold font-['Poppins']"
                 >
                   Start Over
