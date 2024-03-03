@@ -4,6 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import userIcon from "../../../../Assets/UserIcon.png";
 import hospitalIcon from "../../../../Assets/Hospital_Icon.png";
+import { SpinningCircles } from "react-loading-icons";
 
 function HospitalNearMe() {
   const [location, setLocation] = useState({
@@ -12,9 +13,11 @@ function HospitalNearMe() {
   });
   const [nearby, setNearby] = useState([]);
   const mapRef = useRef(null); // Create a ref for MapContainer
+  const [loading,setLoading] = useState(true);
 
   const fetchNearbyHospitals = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/getNearbyHospital?latitude=${location.latitude}&longitude=${location.longitude}`
       );
@@ -28,6 +31,7 @@ function HospitalNearMe() {
       if (data && data.Data && data.Data.nearbyHospitals) {
         console.log(data.Data.nearbyHospitals);
         setNearby(data.Data.nearbyHospitals);
+        setLoading(false);
       } else {
         console.error("Error: nearbyHospitals not found in response data");
       }
@@ -90,7 +94,12 @@ function HospitalNearMe() {
           Nearby Hospitals
         </p>
         <ul className="mt-12">
-          {nearby.map((hospital) => (
+          {loading ? (
+            <div className=" w-100 h-[60vh] flex justify-center items-center">
+                <SpinningCircles color="#4299e1" fill="#4299e1"/>
+            </div>
+          )
+            : nearby.map((hospital) => (
             <li key={hospital._id} className="mb-4 flex items-center">
               <img
                 src={hospitalIcon}
@@ -116,7 +125,7 @@ function HospitalNearMe() {
       <div className=" w-[70vw] h-[100%]">
         <MapContainer
           center={[location.latitude, location.longitude]}
-          zoom={13}
+          zoom={2}
           style={{ height: "100%", width: "100%" }}
           whenCreated={(mapInstance) => (mapRef.current = mapInstance)} // Set the mapRef when the map is created
         >
