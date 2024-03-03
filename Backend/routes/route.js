@@ -45,13 +45,17 @@ const { getUniqueStates } = require("../controllers/getStates");
 const { getDistrict } = require("../controllers/getDistrict");
 const { Get_NearBy_Hospitals } = require("../controllers/Get_NearBy_Hospitals");
 const { Show_Doctors } = require("../controllers/Show_Doctors");
+const {
+  getAppointmentDateData,
+} = require("../controllers/getAppointmentDateData");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
 router.get("/get-state", getUniqueStates);
 router.get("/get-district", getDistrict);
 router.get("/getNearbyHospital", Get_NearBy_Hospitals);
-router.get("/get-doctors",Show_Doctors);
+router.get("/get-doctors", Show_Doctors);
+router.get("/get-dates", getAppointmentDateData);
 
 router.get("/test", authentication, isPatient, (req, res) => {
   return res.status(200).json({
