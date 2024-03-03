@@ -2,6 +2,7 @@ const express = require('express');
 const dbconnect = require('./config/database');
 const app = express();
 const cookiesParser = require('cookie-parser');
+// const helper = require('./utilities/departmentData')
 // const cors = require('cors');
 
 // app.use(cors());
@@ -28,3 +29,6 @@ const routes = require('./routes/route');
 const cookieParser = require('cookie-parser');
 //mounting the route.
 app.use("/hc",routes);
+
+//function to add department in mongodb 
+// helper();

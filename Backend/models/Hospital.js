@@ -11,7 +11,6 @@ const hospitalSchema = new mongoose.Schema({
     Telephone: String,
     State_ID: String,
     District_ID: String,
-    Department:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Department' }],
 });
 
 module.exports = mongoose.model("Hospital",hospitalSchema);

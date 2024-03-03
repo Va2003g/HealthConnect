@@ -1,7 +1,7 @@
 const mongoose  = require('mongoose');
 const Hospital = require('./Hospital');
 const AvailabilitySchema = new mongoose.Schema({
-    date: { 
+    DOA: { 
         type: Date, 
         required: true 
     },
@@ -22,4 +22,13 @@ const departmentSchema = new mongoose.Schema({
     Availability:[AvailabilitySchema],
 })
 
-module.exports = mongoose.model('Department',departmentSchema)
+// module.exports = mongoose.model('Department',departmentSchema)
+// module.exports = mongoose.model('Availability',AvailabilitySchema)
+
+const Department = mongoose.model('Department', departmentSchema);
+const Availability = mongoose.model('Availability', AvailabilitySchema);
+
+module.exports = {
+    Department,
+    Availability,
+};
