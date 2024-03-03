@@ -1,5 +1,5 @@
 const { Department, Availability } = require("../models/Department");
-
+const moment = require('moment');
 function generateMonthlyAvailability(year, month) {
     const today = moment()
       .year(year)
@@ -25,6 +25,7 @@ exports.getAppointmentDateData = async (req, res) => {
     const { HospitalId, name, month, year } = req.body;
     // console.log(req);
     // console.log(hospitalId,departmentName,month,year);
+    console.log(typeof HospitalId);
     const Data = await Department.findOne({ HospitalId, name });
 
     // console.log(Data);

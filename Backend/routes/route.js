@@ -48,6 +48,7 @@ const { Show_Doctors } = require("../controllers/Show_Doctors");
 const {
   getAppointmentDateData,
 } = require("../controllers/getAppointmentDateData");
+const {bookAppointment} = require('../controllers/bookAppointment');
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
@@ -56,6 +57,7 @@ router.get("/get-district", getDistrict);
 router.get("/getNearbyHospital", Get_NearBy_Hospitals);
 router.get("/get-doctors", Show_Doctors);
 router.get("/get-dates", getAppointmentDateData);
+router.post("/book-appointment", bookAppointment);
 
 router.get("/test", authentication, isPatient, (req, res) => {
   return res.status(200).json({
