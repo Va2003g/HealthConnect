@@ -19,6 +19,23 @@ exports.bookAppointment =  async (req,res)=>{
         const hospitalid = hospitalData._id.toHexString();
         // console.log(typeof hospitalid);
         const departmentData = await Department.findOne({name:departmentName,HospitalId:hospitalid});
+
+        const checkAppointment = await Appointment.findOne({
+                patient:patientData._id,
+                hospital:hospitalData._id,
+                department:departmentData._id,
+                date:date,
+                status:"Scheduled"
+            });
+
+            if(checkAppointment)
+            {
+                return res.status(400).json({
+                    success:false,
+                    message:"You have already booked this appointment"
+                })
+            }
+            
         const newAppointment = await Appointment.create({
             patient:patientData._id,
             hospital:hospitalData._id,
