@@ -13,7 +13,7 @@ const mailSender = async (email, title, body) => {
             })
 
             let info = await transporter.sendMail({
-                from: 'HealthConnect || Easy Book and Locate Doctors and Hospitals',
+                from: 'HealthConnect || Easily Book and Locate Doctors and Hospitals <healthConnect@gamil.com>',
                 to:`${email}`,
                 subject: `${title}`,
                 html: `${body}`,

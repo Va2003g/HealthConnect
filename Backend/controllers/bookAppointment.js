@@ -13,7 +13,6 @@ exports.bookAppointment =  async (req,res)=>{
         //is date available?? no other appointments are there //will be done prior to appointment
 
         // send mail ki your appointment is pending for approval
-        // send mail when appointment is approved;
         const patientData = await User.findOne({email:patientEmail});
         const hospitalData = await Hospital.findOne({Hospital_Name:hospitalName,State:state,District:district});
         // console.log(hospitalData._id.toHexString().toString());
@@ -28,8 +27,8 @@ exports.bookAppointment =  async (req,res)=>{
             status:"Scheduled"
         });
 
-        const title = `Regarding your Appointment with ${hospitalData.Hospital_Name} and Department ${departmentData.name}`;
-        const body = `Hi, ${patientData.name} <br> <p>Your Appointment with ${departmentData.name} at ${hospitalData.Hospital_Name} has send for approval</p><br> You will get approval mail shortly`
+        const title = `Appointment Confirmation Mail`;
+        const body = `Congratulations, ${patientData.name} <br> <p>Your Appointment with ${departmentData.name} at ${hospitalData.Hospital_Name} has been successfully scheduled</p>`
         //email,title,body
 
         await mailSender(patientData.email,title,body);
