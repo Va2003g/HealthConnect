@@ -4,8 +4,8 @@ import { AppContext } from "../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
-  const [accountType, setaccountType] = useState("Patient");
+  const { isLoggedIn, setAndCheckExpiration, setName } = useContext(AppContext);
+  const [accountType, setAccountType] = useState("Patient");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -15,7 +15,8 @@ const SignupForm = () => {
     Email: "",
     Password: "",
     ConfirmPassword: "",
-    accountType,
+    accountType: "Patient", // Set initial value here
+    speciality: "", // Set initial value for speciality here
   });
 
   function changeHandler(event) {
@@ -29,20 +30,22 @@ const SignupForm = () => {
     console.log(formData);
     event.preventDefault();
     const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/signup`,{
-        method:"POST",
-        headers:{
-          "content-Type":"application/json"
+      `${process.env.REACT_APP_BACKEND_URL}/signup`,
+      {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
         },
-        body:JSON.stringify(formData),
+        body: JSON.stringify(formData),
       }
-    )
+    );
     console.log(response);
 
-    if(response.ok)
-    {
-      setIsLoggedIn(true);
-      navigate('/');
+    if (response.ok) {
+      setName(formData.FirstName);
+      setAndCheckExpiration(true);
+      if (accountType === "Patient") navigate("/");
+      else navigate("/Hospital_Near_Me");
     }
   }
 
@@ -53,11 +56,20 @@ const SignupForm = () => {
     }
   }, [isLoggedIn, navigate]);
 
+  const setAccountTypeAndUpdateFormData = (type) => {
+    setAccountType(type);
+    setFormData((prevData) => ({
+      ...prevData,
+      accountType: type,
+      speciality: type === "Doctor" ? "" : undefined, // Set speciality only for Doctor
+    }));
+  };
+
   return (
     <div>
       <div className="flex p-1 gap-x-1 rounded-full max-w-max border border-gray-400">
         <button
-          onClick={() => setaccountType("Patient")}
+          onClick={() => setAccountTypeAndUpdateFormData("Patient")}
           className={`${
             accountType === "Patient"
               ? "bg-blue-500 text-white"
@@ -66,12 +78,16 @@ const SignupForm = () => {
         >
           Patient
         </button>
-        <button onClick={() => setaccountType("Doctor")}
-        className={`${
+        <button
+          onClick={() => setAccountTypeAndUpdateFormData("Doctor")}
+          className={`${
             accountType === "Doctor"
               ? "bg-blue-500 text-white"
               : "bg-transparent"
-          } py-2 px-5 rounded-full transition-all duration-200`}>Doctor</button>
+          } py-2 px-5 rounded-full transition-all duration-200`}
+        >
+          Doctor
+        </button>
       </div>
 
       <form onSubmit={submitHandler}>
@@ -122,6 +138,24 @@ const SignupForm = () => {
             />
           </label>
         </div>
+        {accountType === "Doctor" && ( // Render speciality field only if accountType is Doctor
+          <div className="mt-[15px]">
+            <label>
+              <p className="text-[0.65rem] mb-1 leading-[1.375rem]">
+                Speciality <sup>*</sup>
+              </p>
+              <input
+                required
+                type="text"
+                value={formData.speciality}
+                onChange={changeHandler}
+                placeholder="Enter Speciality"
+                name="speciality"
+                className="rounded-[0.2rem] w-full p-[4px] border border-gray-400"
+              />
+            </label>
+          </div>
+        )}
         <div className="flex gap-x-5 mt-[15px]">
           <label className="relative">
             <p className="text-[0.65rem] mb-1 leading-[1.375rem]">

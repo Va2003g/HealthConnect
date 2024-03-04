@@ -1,12 +1,12 @@
 import React from "react";
 import Book_Appointement_Template from "../../Components/Home/Book_Appointement/Book_Appointement_Template";
 
-const Book_Appointement_Hospital = () => {
+const Book_Appointement_SelectMode = () => {
   return (
     <div>
-      <Book_Appointement_Template type="Hospital" />
+      <Book_Appointement_Template type="Mode" />
     </div>
   );
 };
 
-export default Book_Appointement_Hospital;
+export default Book_Appointement_SelectMode;

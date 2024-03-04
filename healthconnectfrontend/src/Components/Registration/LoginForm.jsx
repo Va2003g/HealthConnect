@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 const LoginForm = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
-  const {name,setName} = useContext(AppContext);
+  const { isLoggedIn, setAndCheckExpiration } = useContext(AppContext);
+  const { name, setName } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -25,25 +25,21 @@ const LoginForm = () => {
   async function submitHandler(event) {
     event.preventDefault();
     //handling with backend part
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/login`,{
-        method:"POST",
-        headers:{
-          "content-Type":"application/json"
-        },
-        body:JSON.stringify(formData),
-      }
-    )
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
     console.log(response);
-    
 
-    if(response.ok)
-    {
-      const {name} = await response.json();
-      console.log(name);
-      setName(name);
-      setIsLoggedIn(true);
-      navigate("/")
+    if (response.ok) {
+      const data = await response.json();
+      setName(data.name);
+      setAndCheckExpiration(true);
+      if (data.role === "Patient") navigate("/");
+      else navigate("/Hospital_Near_Me");
     }
   }
 
@@ -55,10 +51,7 @@ const LoginForm = () => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <form
-      onSubmit={submitHandler}
-      className="flex flex-col w-full gap-y-4 "
-    >
+    <form onSubmit={submitHandler} className="flex flex-col w-full gap-y-4 ">
       <label className="w-full">
         <p className="text-[0.65rem] mb-1 leading-[1.375rem]">
           Email Address <sup>*</sup>
@@ -99,11 +92,15 @@ const LoginForm = () => {
         </span>
 
         <Link to="/Forget">
-          <p className="text-xs text-blue-400 max-w-max ml-auto font-bold mt-2">Forget Password</p>
+          <p className="text-xs text-blue-400 max-w-max ml-auto font-bold mt-2">
+            Forget Password
+          </p>
         </Link>
       </label>
 
-      <button className="bg-blue-500 rounded-[8px] font-medium text-white px-[12px] py-[8px]">Sign in</button>
+      <button className="bg-blue-500 rounded-[8px] font-medium text-white px-[12px] py-[8px]">
+        Sign in
+      </button>
     </form>
   );
 };

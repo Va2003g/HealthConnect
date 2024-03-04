@@ -14,6 +14,8 @@ import Hospital_Near_ME from "./Components/Home/Special Services/Special Service
 import Book_Appointement_SelectType from "./Components/Home/Book_Appointement/Book_Appointement_SelectType";
 import Book_Appointement_Type from "./Pages/Book_Appointement/Book_Appointement_Type";
 import Book_Appointement_Departement from "./Pages/Book_Appointement/Book_Appointement_Departement";
+import Book_Appointement_SelectMode from "./Pages/Book_Appointement/Book_Appointement_SelectMode";
+import Book_Appointement_Doctors from "./Pages/Book_Appointement/Book_Appointement_Doctors";
 
 function App() {
   return (
@@ -41,11 +43,19 @@ function App() {
         ></Route>
         <Route
           path="/Book_Appointement_type"
-          element={<Book_Appointement_Type/>}
+          element={<Book_Appointement_Type />}
         ></Route>
         <Route
           path="/Book_Appointement_Depart"
-          element={<Book_Appointement_Departement/>}
+          element={<Book_Appointement_Departement />}
+        ></Route>
+        <Route
+          path="/Book_Appointement_Mode"
+          element={<Book_Appointement_SelectMode />}
+        ></Route>
+        <Route
+          path="/Book_Appointement_Doctor"
+          element={<Book_Appointement_Doctors />}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>
