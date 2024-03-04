@@ -25,7 +25,7 @@ exports.getAppointmentDateData = async (req, res) => {
     const { HospitalId, name, month, year } = req.body;
     // console.log(req);
     // console.log(hospitalId,departmentName,month,year);
-    console.log(typeof HospitalId);
+    // console.log(typeof HospitalId);
     const Data = await Department.findOne({ HospitalId, name });
 
     // console.log(Data);
@@ -43,7 +43,7 @@ exports.getAppointmentDateData = async (req, res) => {
       });
       return res.status(200).json({
         success:true,
-        message:"Creating new department entry,send availability array".
+        message:"Creating new department entry,send availability array",
         monthlyAvailability
       })
     } else {
@@ -52,7 +52,7 @@ exports.getAppointmentDateData = async (req, res) => {
         const filteredAppointments = Data.Availability.filter((availability) => {
             const appointmentDate = new Date(availability.DOA);
             return (
-              appointmentDate.getMonth() === month &&
+              appointmentDate.getMonth()+1 === month &&
               appointmentDate.getFullYear() === year &&
               availability.appointmentsLeft > 0
             );

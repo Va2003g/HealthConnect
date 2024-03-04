@@ -1,6 +1,6 @@
 const Appointment = require('../models/Appointment');
 const mailSender = require('../utilities/mailSender');
-const {Department} = require('../models/Department');
+const {Department, Availability} = require('../models/Department');
 const User  = require('../models/User');
 const Hospital = require('../models/Hospital');
 exports.bookAppointment =  async (req,res)=>{
@@ -35,7 +35,24 @@ exports.bookAppointment =  async (req,res)=>{
                     message:"You have already booked this appointment"
                 })
             }
-            
+        let documentIndex = 0;
+        let appointmentLeft = 0;
+        const appointmentDate = departmentData.Availability.forEach((availability,index)=>{
+            const appointmentDate = new Date(availability.DOA);
+            const dateFromInput = new Date(date);
+            if (
+              appointmentDate.getDate() == dateFromInput.getDate() &&
+              appointmentDate.getMonth() == dateFromInput.getMonth()-1 &&
+              appointmentDate.getFullYear() == dateFromInput.getFullYear()
+            )
+            {
+                documentIndex = index;
+                appointmentLeft = availability.appointmentsLeft;
+            }
+        })
+        console.log("index:",documentIndex);
+        departmentData.Availability[documentIndex].appointmentsLeft = appointmentLeft - 1;
+        await departmentData.save();
         const newAppointment = await Appointment.create({
             patient:patientData._id,
             hospital:hospitalData._id,
@@ -48,7 +65,7 @@ exports.bookAppointment =  async (req,res)=>{
         const body = `Congratulations, ${patientData.name} <br> <p>Your Appointment with ${departmentData.name} at ${hospitalData.Hospital_Name} has been successfully scheduled</p>`
         //email,title,body
 
-        await mailSender(patientData.email,title,body);
+        // await mailSender(patientData.email,title,body);
         return res.status(200).json({
             success:true,
             message:"Email Send Successfully"
