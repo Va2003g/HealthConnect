@@ -1,26 +1,30 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        trim:true,//will help to save data in proper order ignoring spaces:- "hello "," hello " all are "hello"
+    name: {
+        type: String,
+        required: true,
+        trim: true,
     },
-    email:{
-        type:mongoose.Schema.Types.String,
-        required:true,
-        trim:true,
-        Unique:true,
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
     },
-    password:{
-        type:String,
-        required:true,
-        trim:true,
+    password: {
+        type: String,
+        required: true,
+        trim: true,
     },
-    role:{
-        type:String,
-        required:true,
+    role: {
+        type: String,
+        required: true,
+    },
+    speciality: { // Field for doctor's speciality
+        type: String,
+        default: null, // Default value is null if not provided
     }
 });
 
-module.exports = mongoose.model("user",userSchema);
+module.exports = mongoose.model("user", userSchema);

@@ -44,18 +44,18 @@ const { getHospitalData } = require("../controllers/getHospitalData");
 const { getUniqueStates } = require("../controllers/getStates");
 const { getDistrict } = require("../controllers/getDistrict");
 const { Get_NearBy_Hospitals } = require("../controllers/Get_NearBy_Hospitals");
-const { Show_Doctors } = require("../controllers/Show_Doctors");
 const {
   getAppointmentDateData,
 } = require("../controllers/getAppointmentDateData");
 const {bookAppointment} = require('../controllers/bookAppointment');
+const { ShowDoctors } = require("../controllers/Show_Doctors");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
 router.get("/get-state", getUniqueStates);
 router.get("/get-district", getDistrict);
 router.get("/getNearbyHospital", Get_NearBy_Hospitals);
-router.get("/get-doctors", Show_Doctors);
+router.get("/get-all-doc", ShowDoctors);
 router.get("/get-dates", getAppointmentDateData);
 router.post("/book-appointment", bookAppointment);
 
