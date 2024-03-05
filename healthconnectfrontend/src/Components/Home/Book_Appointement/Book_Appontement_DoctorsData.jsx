@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from "react";
-import StateData from "../../../Assets/states-and-districts.json";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
 
 const Book_Appontement_DoctorsData = () => {
-  const [uniqueStates, setUniqueStates] = useState([]);
+  const { setDoctor } = useContext(AppContext);
+  const [allDoctors,setAllDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Function to fetch unique states from backend
-    const fetchUniqueStates = async () => {
+    // Function to fetch doctors data from backend
+    const fetchDoctors = async () => {
       setLoading(true);
       try {
         const response = await fetch(
           `${process.env.REACT_APP_BACKEND_URL}/get-all-doc`
-        ); // Adjust the URL as per your backend route
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         console.log(data);
-        setUniqueStates(data);
+        setAllDoctors(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching unique states:", error);
+        console.error("Error fetching doctors:", error);
       }
     };
 
-    // Call the function to fetch unique states
-    fetchUniqueStates();
+    // Call the function to fetch doctors data
+    fetchDoctors();
   }, []);
 
   const navigate = useNavigate();
   const handleClickChange = (name) => {
-    // setState(name);
-    navigate("/");
+    setDoctor(name._id);
+    console.log(name._id);
+    navigate("/Book_Appointement_Doctor_Date_Data");
   };
 
   return (
@@ -47,15 +47,18 @@ const Book_Appontement_DoctorsData = () => {
           <div className="w-full h-[60vh] flex justify-center items-center">
             <SpinningCircles color="#4299e1" fill="#4299e1" />
           </div>
-        ) : (
-          uniqueStates.map((name) => (
+        ) : allDoctors && allDoctors.length > 0 ? (
+          allDoctors.map((doc) => (
             <button
-              onClick={() => handleClickChange(name)}
+              key={doc.id} // Assuming each doctor has a unique ID
+              onClick={() => handleClickChange(doc)}
               className="w-full text-center my-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white"
             >
-              {name.name + " (" + name.speciality + ")"}
+              {doc.name + " (" + doc.speciality + ")"}
             </button>
           ))
+        ) : (
+          <div>No doctors available</div>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ import Book_Appointement_DepartType from "./Book_Appointement_DepartType";
 import Book_Appointement_Mode from "./Book_Appointement_Mode";
 import Book_Appointement_Doctors from "../../../Pages/Book_Appointement/Book_Appointement_Doctors";
 import Book_Appontement_DoctorsData from "./Book_Appontement_DoctorsData";
+import Book_Appointement_Doctor_Date_Data from "./Book_Appointement_Doctor_Date_Data";
 
 const Book_Appointement_Template = ({ type }) => {
   const navigate = useNavigate();
@@ -75,6 +76,8 @@ const Book_Appointement_Template = ({ type }) => {
             <Book_Appointement_Mode />
           ) : type === "Doctors" ? (
             <Book_Appontement_DoctorsData/>
+          ) : type === "Doctor_Date" ? (
+            <Book_Appointement_Doctor_Date_Data/>
           ) : null}
         </div>
         <div className="flex gap-5 mb-[2rem] justify-evenly">
