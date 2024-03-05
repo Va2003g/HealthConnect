@@ -19,7 +19,17 @@ function AppContextProvider({ children }) {
   const [mode, setMode] = useState(
     localStorage.getItem("mode") || "" // Initialize with stored mode or empty string
   );
-
+  
+  // data for appointment
+  const [appointmentData,setAppointmentData] = useState({
+    type:"",
+    patientEmail:"",
+    hospitalName:"",
+    state:"",
+    district:"",
+    departmentName:"",
+    date:""
+  });
   useEffect(() => {
     // Update local storage based on state changes
     localStorage.setItem("isLoggedIn", isLoggedIn);
@@ -65,6 +75,8 @@ function AppContextProvider({ children }) {
         setHospital,
         mode,
         setMode, // Add mode and setMode to context value
+        appointmentData,
+        setAppointmentData
       }}
     >
       {children}

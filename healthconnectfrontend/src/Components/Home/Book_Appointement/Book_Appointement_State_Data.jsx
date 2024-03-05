@@ -6,7 +6,7 @@ import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
 
 const Book_Appointement_State_Data = () => {
-  const { setState } = useContext(AppContext);
+  const { setState,setAppointmentData } = useContext(AppContext);
   const [uniqueStates, setUniqueStates] = useState([]);
   const [loading,setLoading] = useState(true);
 
@@ -35,8 +35,11 @@ const Book_Appointement_State_Data = () => {
   }, []);
 
   const navigate = useNavigate();
-  const handleClickChange = (name) => {
-    setState(name);
+  const handleClickChange = (event) => {
+    setState(event.target.innerText);
+    setAppointmentData((appointmentData)=>{
+      return {...appointmentData,state:event.target.innerText}
+    })
     navigate("/Book_Appointement_District");
   };
 
@@ -51,9 +54,10 @@ const Book_Appointement_State_Data = () => {
             </div>
           ):
         
-        uniqueStates.map((name) => (
+        uniqueStates.map((name,index) => (
           <button
-            onClick={() => handleClickChange(name)}
+            key={index}
+            onClick={handleClickChange}
             className="w-[47%] text-centre m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:"
           >
             {name}
