@@ -18,7 +18,10 @@ const {
   resetPasswordToken,
   resetPassword,
 } = require("../controllers/resetPassword");
+
+const { Get_Doctor_Appointement } = require("../controllers/Get_Doctor_Appointement");
 router.post("/reset-password-token", resetPasswordToken);
+router.post("/Set_doctor_Appointement" , Get_Doctor_Appointement);
 router.put("/reset-password", resetPassword);
 
 //getting hospital data for checking
@@ -49,6 +52,8 @@ const {
 } = require("../controllers/getAppointmentDateData");
 const {bookAppointment} = require('../controllers/bookAppointment');
 const { ShowDoctors } = require("../controllers/Show_Doctors");
+
+
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
