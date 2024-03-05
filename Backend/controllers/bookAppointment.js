@@ -65,7 +65,7 @@ exports.bookAppointment =  async (req,res)=>{
         const body = `Congratulations, ${patientData.name} <br> <p>Your Appointment with ${departmentData.name} at ${hospitalData.Hospital_Name} has been successfully scheduled</p>`
         //email,title,body
 
-        // await mailSender(patientData.email,title,body);
+        await mailSender(patientData.email,title,body);
         return res.status(200).json({
             success:true,
             message:"Email Send Successfully"
