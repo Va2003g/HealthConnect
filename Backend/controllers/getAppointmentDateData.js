@@ -1,4 +1,5 @@
 const { Department, Availability } = require("../models/Department");
+const Hospital = require('../models/Hospital')
 const moment = require('moment');
 function generateMonthlyAvailability(year, month) {
     const today = moment()
@@ -22,13 +23,16 @@ function generateMonthlyAvailability(year, month) {
 
 exports.getAppointmentDateData = async (req, res) => {
   try {
-    const { HospitalId, name, month, year } = req.body;
-    // console.log(req);
-    // console.log(hospitalId,departmentName,month,year);
+    const {hospitalName,state,district,departmentName, month, year } = await JSON.parse(req.query.data);
+    console.log(req.query);
+    // console.log(req.query.data.json());
+    console.log(hospitalName,state,district,departmentName, month, year);
     // console.log(typeof HospitalId);
-    const Data = await Department.findOne({ HospitalId, name });
+    const hospitalData = await Hospital.findOne({Hospital_Name:hospitalName,State:state,District:district});
+    const HospitalId = hospitalData._id;
+    const Data = await Department.findOne({ HospitalId, name:departmentName });
 
-    // console.log(Data);
+    console.log(Data);
     // console.log(Data.Availability);
     
     if (Data == null) {
@@ -38,7 +42,7 @@ exports.getAppointmentDateData = async (req, res) => {
       let monthlyAvailability = generateMonthlyAvailability(year,month);
       const department = await Department.create({
         HospitalId,
-        name,
+        name:departmentName,
         Availability:monthlyAvailability
       });
       return res.status(200).json({
@@ -59,11 +63,20 @@ exports.getAppointmentDateData = async (req, res) => {
           });
           
           if (filteredAppointments.length === 0) {
-            console.log("No dates available");
-            return res.status(404).json({
-                success:false,
-                message:"Sorry no date available for this current month"
-            });
+            console.log("New Month: ",year,month);
+            console.log("DataBase year month: ",Data.Availability[0].DOA);
+            const newMonthDates = generateMonthlyAvailability(year,month);
+            Data.Availability = newMonthDates;
+            Data.save();
+            // return res.status(404).json({
+            //     success:false,
+            //     message:"Sorry no date available for this current month"
+            // });
+            return res.status(200).json({
+              success:true,
+              message:"Following Dates are available",
+              newMonthDates,
+            })
           } else {
             // console.log(filteredAppointments);
             return res.status(200).json({

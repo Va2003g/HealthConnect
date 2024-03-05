@@ -25,6 +25,16 @@ function AppContextProvider({ children }) {
 
   const [Uid, setUid] = useState(localStorage.getItem("Uid") || "");
 
+  // data for appointment
+  const [appointmentData, setAppointmentData] = useState({
+    type: "",
+    patientEmail: "",
+    hospitalName: "",
+    state: "",
+    district: "",
+    departmentName: "",
+    date: "",
+  });
   useEffect(() => {
     // Update local storage based on state changes
     localStorage.setItem("isLoggedIn", isLoggedIn);
@@ -88,6 +98,9 @@ function AppContextProvider({ children }) {
         setDoctorDate, // Include setDoctorDate in the context value
         Uid,
         setUid,
+        setMode, // Add mode and setMode to context value
+        appointmentData,
+        setAppointmentData,
       }}
     >
       {children}

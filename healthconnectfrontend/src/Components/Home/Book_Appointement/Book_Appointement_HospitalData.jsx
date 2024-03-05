@@ -5,7 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const Book_Appointement_HospitalData = () => {
   const { state, district } = useContext(AppContext);
-  const { setHospital } = useContext(AppContext);
+  const { setHospital,appointmentData,setAppointmentData} = useContext(AppContext);
   const [data, setData] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -36,9 +36,12 @@ const Book_Appointement_HospitalData = () => {
   }, [data]);
 
   const navigate = useNavigate();
-  const handleClickChange = (name) => {
-    setHospital(name);
-    console.log(name);
+  const handleClickChange = (event) => {
+    setHospital(event.target.innerText);
+    console.log(event.target.innerText);
+    setAppointmentData((appointmentData)=>{
+      return {...appointmentData,hospitalName:event.target.innerText}
+    })
     navigate("/Book_Appointement_Depart");
   };
 
@@ -56,7 +59,7 @@ const Book_Appointement_HospitalData = () => {
               <button
                 key={index}
                 className="w-[47%] text-center m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:"
-                onClick={() => handleClickChange(hospital?.Hospital_Name)}
+                onClick={handleClickChange}
               >
                 {hospital?.Hospital_Name}
               </button>

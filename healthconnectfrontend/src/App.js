@@ -16,6 +16,7 @@ import Book_Appointement_Type from "./Pages/Book_Appointement/Book_Appointement_
 import Book_Appointement_Departement from "./Pages/Book_Appointement/Book_Appointement_Departement";
 import Book_Appointement_SelectMode from "./Pages/Book_Appointement/Book_Appointement_SelectMode";
 import Book_Appointement_Doctors from "./Pages/Book_Appointement/Book_Appointement_Doctors";
+import Book_Appointement_Dates from "./Pages/Book_Appointement/Book_Appointement_Dates";
 import Book_Appointement_Doctor_Date_Data from "./Components/Home/Book_Appointement/Book_Appointement_Doctor_Date_Data";
 import Book_Appointement_Doctor_Date from "./Pages/Book_Appointement/Book_Appointement_Doctor_Date";
 import Doctor_HomeScreen from "./Pages/DoctorHome/Home/Doctor_HomeScreen";
@@ -59,6 +60,10 @@ function App() {
         <Route
           path="/Book_Appointement_Doctor"
           element={<Book_Appointement_Doctors />}
+        ></Route>
+        <Route
+          path="/Book_Appointement_Dates"
+          element={<Book_Appointement_Dates />}
         ></Route>
         <Route
           path="/Book_Appointement_Doctor_Date_Data"

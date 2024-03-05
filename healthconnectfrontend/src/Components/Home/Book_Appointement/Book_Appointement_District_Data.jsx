@@ -4,7 +4,7 @@ import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
 
 const Book_Appointement_District_Data = () => {
-  const { state, setDistrict } = useContext(AppContext);
+  const { state, setDistrict,appointmentData,setAppointmentData } = useContext(AppContext);
   const [uniqueDistricts, setUniqueDistricts] = useState([]);
   const [loading,setLoading] = useState(true);
 
@@ -41,8 +41,11 @@ const Book_Appointement_District_Data = () => {
   }, [state]); // Re-fetch districts when state changes
 
   const navigate = useNavigate();
-  const handleClickChange = (name) => {
-    setDistrict(name);
+  const handleClickChange = (event) => {
+    setDistrict(event.target.innerText);
+    setAppointmentData((appointmentData)=>{
+      return {...appointmentData,district:event.target.innerText}
+    })
     navigate("/Book_Appointement_Hospital");
   };
 
@@ -58,7 +61,7 @@ const Book_Appointement_District_Data = () => {
           ) :
         uniqueDistricts.map((name, index) => (
           <button
-            onClick={() => handleClickChange(name)}
+            onClick={handleClickChange}
             key={index}
             className="w-[47%] text-centre m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:"
           >
