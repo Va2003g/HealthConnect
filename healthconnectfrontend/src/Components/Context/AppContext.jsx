@@ -13,11 +13,18 @@ function AppContextProvider({ children }) {
   const [name, setName] = useState(localStorage.getItem("name") || "");
   const [hospital, setHospital] = useState(
     localStorage.getItem("hospital") || ""
-  ); // Parsed JSON
-
-  // Add mode and setMode
+  );
   const [mode, setMode] = useState(
-    localStorage.getItem("mode") || "" // Initialize with stored mode or empty string
+    localStorage.getItem("mode") || ""
+  );
+
+  // Add Doctor state and setter
+  const [doctor, setDoctor] = useState(
+    localStorage.getItem("doctor") || ""
+  );
+
+  const [doctorDate, setDoctorDate] = useState(
+    localStorage.getItem("doctorDate") || ""
   );
 
   useEffect(() => {
@@ -26,11 +33,11 @@ function AppContextProvider({ children }) {
     localStorage.setItem("state", state);
     localStorage.setItem("district", district);
     localStorage.setItem("name", name);
-    localStorage.setItem("hospital", JSON.stringify(hospital)); // Store hospital as JSON
-
-    // Update local storage with mode
+    localStorage.setItem("hospital", hospital);
     localStorage.setItem("mode", mode);
-  }, [isLoggedIn, state, district, name, hospital, mode]); // Add mode to dependency array
+    localStorage.setItem("doctor", doctor);
+    localStorage.setItem("doctorDate", doctorDate); // Store the date in local storage
+  }, [isLoggedIn, state, district, name, hospital, mode, doctor, doctorDate]);
 
   // Function to set and update expiration timestamp
   const setAndCheckExpiration = (newValue) => {
@@ -39,14 +46,14 @@ function AppContextProvider({ children }) {
     localStorage.setItem(
       "isLoggedInExpiration",
       Date.now() + 24 * 60 * 60 * 1000
-    ); // Set expiration 24 hours from now
+    );
   };
 
   // Check for expired login on component mount
   useEffect(() => {
     const storedExpiration = localStorage.getItem("isLoggedInExpiration");
     if (storedExpiration && parseInt(storedExpiration) < Date.now()) {
-      setAndCheckExpiration(false); // Set isLoggedIn to false if expired
+      setAndCheckExpiration(false);
     }
   }, []);
 
@@ -64,7 +71,12 @@ function AppContextProvider({ children }) {
         hospital,
         setHospital,
         mode,
-        setMode, // Add mode and setMode to context value
+        setMode,
+        // Include Doctor state and setter in the context value
+        doctor,
+        setDoctor,
+        doctorDate, // Include doctorDate in the context value
+        setDoctorDate, // Include setDoctorDate in the context value
       }}
     >
       {children}
