@@ -49,6 +49,7 @@ exports.login = async (req, res) => {
           success: true,
           name:existedUser.name,
           role:existedUser.role,
+          id:existedUser._id,
           message: `${existedUser.name} logged successfully`,
           authToken,
         });

@@ -57,6 +57,7 @@ exports.signup = async (req, res) => {
 
     return res.status(200).json({
       success: true,
+      id : newUser._id,
       message: `Welcome to Health Connect ${name}`,
     });
   } catch (err) {
