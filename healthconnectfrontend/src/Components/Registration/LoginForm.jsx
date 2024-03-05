@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 const LoginForm = () => {
-  const { isLoggedIn, setAndCheckExpiration } = useContext(AppContext);
+  const { isLoggedIn, setAndCheckExpiration,setUid } = useContext(AppContext);
   const { name, setName } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -36,10 +36,12 @@ const LoginForm = () => {
 
     if (response.ok) {
       const data = await response.json();
+      console.log(data);
       setName(data.name);
+      setUid(data.id);
       setAndCheckExpiration(true);
       if (data.role === "Patient") navigate("/");
-      else navigate("/Hospital_Near_Me");
+      else navigate("/Doctor_UI");
     }
   }
 

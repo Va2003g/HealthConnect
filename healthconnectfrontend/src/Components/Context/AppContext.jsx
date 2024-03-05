@@ -14,18 +14,16 @@ function AppContextProvider({ children }) {
   const [hospital, setHospital] = useState(
     localStorage.getItem("hospital") || ""
   );
-  const [mode, setMode] = useState(
-    localStorage.getItem("mode") || ""
-  );
+  const [mode, setMode] = useState(localStorage.getItem("mode") || "");
 
   // Add Doctor state and setter
-  const [doctor, setDoctor] = useState(
-    localStorage.getItem("doctor") || ""
-  );
+  const [doctor, setDoctor] = useState(localStorage.getItem("doctor") || "");
 
   const [doctorDate, setDoctorDate] = useState(
     localStorage.getItem("doctorDate") || ""
   );
+
+  const [Uid, setUid] = useState(localStorage.getItem("Uid") || "");
 
   useEffect(() => {
     // Update local storage based on state changes
@@ -36,8 +34,19 @@ function AppContextProvider({ children }) {
     localStorage.setItem("hospital", hospital);
     localStorage.setItem("mode", mode);
     localStorage.setItem("doctor", doctor);
-    localStorage.setItem("doctorDate", doctorDate); // Store the date in local storage
-  }, [isLoggedIn, state, district, name, hospital, mode, doctor, doctorDate]);
+    localStorage.setItem("doctorDate", doctorDate);
+    localStorage.setItem("Uid", Uid);
+  }, [
+    isLoggedIn,
+    state,
+    district,
+    name,
+    hospital,
+    mode,
+    doctor,
+    doctorDate,
+    Uid,
+  ]);
 
   // Function to set and update expiration timestamp
   const setAndCheckExpiration = (newValue) => {
@@ -77,6 +86,8 @@ function AppContextProvider({ children }) {
         setDoctor,
         doctorDate, // Include doctorDate in the context value
         setDoctorDate, // Include setDoctorDate in the context value
+        Uid,
+        setUid,
       }}
     >
       {children}

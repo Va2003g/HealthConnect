@@ -18,6 +18,7 @@ import Book_Appointement_SelectMode from "./Pages/Book_Appointement/Book_Appoint
 import Book_Appointement_Doctors from "./Pages/Book_Appointement/Book_Appointement_Doctors";
 import Book_Appointement_Doctor_Date_Data from "./Components/Home/Book_Appointement/Book_Appointement_Doctor_Date_Data";
 import Book_Appointement_Doctor_Date from "./Pages/Book_Appointement/Book_Appointement_Doctor_Date";
+import Doctor_HomeScreen from "./Pages/DoctorHome/Home/Doctor_HomeScreen";
 
 function App() {
   return (
@@ -62,6 +63,10 @@ function App() {
         <Route
           path="/Book_Appointement_Doctor_Date_Data"
           element={<Book_Appointement_Doctor_Date/>}
+        ></Route>
+        <Route
+          path="/Doctor_UI"
+          element={<Doctor_HomeScreen/>}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>
