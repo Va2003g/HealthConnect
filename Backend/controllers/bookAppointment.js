@@ -43,7 +43,7 @@ exports.bookAppointment =  async (req,res)=>{
             const dateFromInput = new Date(date);
             if (
               appointmentDate.getDate() == dateFromInput.getDate() &&
-              appointmentDate.getMonth() == dateFromInput.getMonth()-1 &&
+              appointmentDate.getMonth() == dateFromInput.getMonth() &&
               appointmentDate.getFullYear() == dateFromInput.getFullYear()
             )
             {
