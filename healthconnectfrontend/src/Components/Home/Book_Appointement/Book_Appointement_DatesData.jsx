@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Book_Appointement_DatesData = () => {
   const navigate = useNavigate();
@@ -139,10 +140,11 @@ const Book_Appointement_DatesData = () => {
       })
       console.log(response);
       console.log(await response.json())
+
       if(response.ok)
       {
         setLoading(false)
-        alert('Booking successfully..')
+        toast.success("Appointement Booked Successfully")
       }
     }
     bookingHospital()

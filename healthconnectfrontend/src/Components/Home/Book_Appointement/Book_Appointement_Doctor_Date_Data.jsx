@@ -4,6 +4,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import dayjs from "dayjs";
 import { AppContext } from "../../Context/AppContext";
+import { toast } from "react-toastify";
 
 export default function StaticDatePickerLandscape() {
   const { setDoctorDate, doctor, doctorDate, Uid } = useContext(AppContext);
@@ -12,7 +13,7 @@ export default function StaticDatePickerLandscape() {
   const handleDateChange = async (newValue) => {
     console.log(newValue);
 
-    const formattedDate = dayjs(tempdate).format('YYYY-MM-DD');
+    const formattedDate = dayjs(tempdate).format("YYYY-MM-DD");
     setDoctorDate(formattedDate);
     setDoctorDate(formattedDate);
     console.log(formattedDate);
@@ -38,12 +39,15 @@ export default function StaticDatePickerLandscape() {
       );
 
       if (!response.ok) {
-        console.log(response);
-        throw new Error("Network response was not ok");
+        const errormess = await response.json();
+        console.log(typeof errormess.message);
+        toast.error(errormess.message);
+        return;
       }
 
       // Handle response if needed
       const responseData = await response.json();
+      toast.success(responseData.message);
       console.log(responseData);
     } catch (error) {
       console.error("Error:", error);

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const { isLoggedIn, setAndCheckExpiration,setUid ,role,setRole} = useContext(AppContext);
@@ -33,9 +34,17 @@ const LoginForm = () => {
       body: JSON.stringify(formData),
     });
     console.log(response);
+
+    if(!response.ok){
+      const errormess = await response.json();
+      console.log(typeof errormess.message);
+      toast.error(errormess.message);
+      return;
+    }
   
     if (response.ok) {
       const data = await response.json();
+      toast.success(data.message);
       console.log(data);
       setName(data.name);
       setUid(data.id);

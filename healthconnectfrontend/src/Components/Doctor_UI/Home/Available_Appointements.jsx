@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Available_Appointments = () => {
   const { Uid } = useContext(AppContext);
@@ -13,7 +15,7 @@ const Available_Appointments = () => {
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
-      day: "numeric", // Adjust formatting options as needed
+      day: "numeric",
     });
   };
 
@@ -34,11 +36,11 @@ const Available_Appointments = () => {
         return data.data.name;
       } else {
         console.error("Error: Patient name not found");
-        return ""; // Set an empty string as a placeholder
+        return "";
       }
     } catch (err) {
       console.error("Error fetching patient details:", err);
-      return ""; // Set an empty string on error (optional)
+      return "";
     }
   };
 
@@ -70,8 +72,9 @@ const Available_Appointments = () => {
       }
     } catch (err) {
       console.error("Error fetching Appointments:", err);
+      toast.error("Failed to fetch appointments");
     } finally {
-      setLoading(false); // Ensure loading state is set to false even on errors
+      setLoading(false);
     }
   };
 
@@ -106,12 +109,14 @@ const Available_Appointments = () => {
 
       if (response.ok) {
         fetchAppointments();
+        toast.success("Appointment approved successfully");
       }
 
       const data = await response.json();
       console.log("Appointment status update response:", data);
     } catch (error) {
       console.error("Error updating appointment status:", error);
+      toast.error("Failed to approve appointment");
     } finally {
       setLoading(false);
     }
@@ -139,12 +144,14 @@ const Available_Appointments = () => {
 
       if (response.ok) {
         fetchAppointments();
+        toast.success("Appointment rejected successfully");
       }
 
       const data = await response.json();
       console.log("Appointment status update response:", data);
     } catch (error) {
       console.error("Error updating appointment status:", error);
+      toast.error("Failed to reject appointment");
     } finally {
       setLoading(false);
     }
@@ -167,7 +174,7 @@ const Available_Appointments = () => {
         <Link to="/scheduled_Appointments">
           <div className="px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]">
             <div className="text-center text-white font-semibold font-['Poppins']">
-              Scheduled Appointements
+              Scheduled Appointments
             </div>
           </div>
         </Link>
