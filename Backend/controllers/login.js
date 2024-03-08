@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
           Date.now() + 3 * 24 * 60 * 60 * 1000 /*time in millisecond*/
         ),
         httpOnly: true,
-        secure: false,
+        sameSite:'None',
       };
 
       return res

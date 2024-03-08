@@ -7,13 +7,14 @@ exports.bookAppointment =  async (req,res)=>{
 
     try{
 
-        const {patientEmail,hospitalName,state,district,departmentName,date} = req.body;
-        // console.log(patientEmail,hospitalName,state,district,departmentName,date);
+        const {patientId,hospitalName,state,district,departmentName,date} = req.body;
+        console.log(patientId,hospitalName,state,district,departmentName,date);
+        // console.log(new Date(date));
         //authentication middleware will automatically check is user valid and a patient;
         //is date available?? no other appointments are there //will be done prior to appointment
 
         // send mail ki your appointment is pending for approval
-        const patientData = await User.findOne({email:patientEmail});
+        const patientData = await User.findById({_id:patientId});
         const hospitalData = await Hospital.findOne({Hospital_Name:hospitalName,State:state,District:district});
         // console.log(hospitalData._id.toHexString().toString());
         const hospitalid = hospitalData._id.toHexString();
@@ -42,7 +43,7 @@ exports.bookAppointment =  async (req,res)=>{
             const dateFromInput = new Date(date);
             if (
               appointmentDate.getDate() == dateFromInput.getDate() &&
-              appointmentDate.getMonth() == dateFromInput.getMonth()-1 &&
+              appointmentDate.getMonth() == dateFromInput.getMonth() &&
               appointmentDate.getFullYear() == dateFromInput.getFullYear()
             )
             {
