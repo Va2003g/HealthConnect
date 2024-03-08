@@ -11,12 +11,11 @@ const Book_Appointement_SelectType = () => {
             New Appointement
           </div>
         </Link>
-        <div className="text-center m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:">
-          View Appointement
-        </div>
-        <div className="text-center m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:">
-          Cancel Appointement
-        </div>
+        <Link to="/view_Appointments">
+          <div className="text-center m-2 p-[1rem] border border-gray-500 rounded-lg transition duration-300 hover:bg-blue-400 hover:text-white hover:">
+            View Appointement
+          </div>
+        </Link>
       </div>
     </div>
   );

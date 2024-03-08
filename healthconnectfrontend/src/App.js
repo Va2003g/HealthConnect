@@ -22,6 +22,7 @@ import Book_Appointement_Doctor_Date from "./Pages/Book_Appointement/Book_Appoin
 import Doctor_HomeScreen from "./Pages/DoctorHome/Home/Doctor_HomeScreen";
 import Available_Appointments from "./Components/Doctor_UI/Home/Available_Appointements";
 import Scheduled_Appointements from "./Components/Doctor_UI/Home/scheduled_Appointements";
+import ShowAllUserAppointements from "./Components/Home/Book_Appointement/showAllUserAppointements";
 
 function App() {
   return (
@@ -79,6 +80,10 @@ function App() {
         <Route
           path="/scheduled_Appointments"
           element={<Scheduled_Appointements/>}
+        ></Route>
+        <Route
+          path="/view_Appointments"
+          element={<ShowAllUserAppointements/>}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>
