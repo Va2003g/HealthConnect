@@ -6,23 +6,24 @@ import dayjs from "dayjs";
 import { AppContext } from "../../Context/AppContext";
 
 export default function StaticDatePickerLandscape() {
-  const { setDoctorDate, doctor, doctorDate } = useContext(AppContext);
+  const { setDoctorDate, doctor, doctorDate, Uid } = useContext(AppContext);
 
   const handleDateChange = async (newValue) => {
-    const formattedDate = newValue.format('YYYY-MM-DD');
+    const formattedDate = newValue.format("YYYY-MM-DD");
     setDoctorDate(formattedDate);
     console.log(formattedDate);
     console.log(doctor);
     const data = {
-      Doc_id: doctor,
-      Date: formattedDate, // Use newValue which is the updated date
+      doctorId: doctor,
+      patientId: Uid,
+      date: formattedDate, // Use newValue which is the updated date
     };
 
-    console.log(data)
+    console.log(data);
 
     try {
       const response = await fetch(
-        `http://localhost:4000/hc/Set_doctor_Appointement`,
+        `${process.env.REACT_APP_BACKEND_URL}/Set_doctor_Appointement`,
         {
           method: "POST",
           headers: {
@@ -33,6 +34,7 @@ export default function StaticDatePickerLandscape() {
       );
 
       if (!response.ok) {
+        console.log(response);
         throw new Error("Network response was not ok");
       }
 

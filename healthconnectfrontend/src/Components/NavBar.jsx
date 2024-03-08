@@ -1,36 +1,38 @@
 import React, { useContext } from "react";
 import Logo_Image from "../Assets/HealthConnectLogo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "./Context/AppContext";
 
 const NavBar = () => {
-  const { isLoggedIn, setAndCheckExpiration } = useContext(AppContext);
+  const { isLoggedIn, setAndCheckExpiration, role } = useContext(AppContext);
   const { name, setName } = useContext(AppContext);
+
+  const navigate = useNavigate();
+  const homePageRedirect = () => {
+    if (role === "patient") {
+      navigate("/");
+    } else {
+      navigate("/Doctor_UI");
+    }
+  };
 
   return (
     <div className="">
       <div className="flex justify-between mx-8 my-3 items-center">
-        <Link to="/">
-          <img
-            src={Logo_Image}
-            alt="Logo"
-            width={160}
-            height={42}
-            loading="lazy"
-          />
-        </Link>
+        <img
+          src={Logo_Image}
+          alt="Logo"
+          width={160}
+          height={42}
+          loading="lazy"
+          onClick={homePageRedirect}
+        />
 
         <nav className="mt-2">
-          <ul className="flex gap-5">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/">About</Link>
-            </li>
-            <li>
-              <Link to="/">Contact</Link>
-            </li>
+          <ul className="flex gap-5 cursor-pointer">
+            <li onClick={homePageRedirect}>Home </li>
+            <li onClick={homePageRedirect}>About </li>
+            <li onClick={homePageRedirect}>Contact</li>
           </ul>
         </nav>
 

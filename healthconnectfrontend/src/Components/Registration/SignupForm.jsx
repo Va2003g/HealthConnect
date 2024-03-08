@@ -4,7 +4,7 @@ import { AppContext } from "../Context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const { isLoggedIn, setAndCheckExpiration, setName,setUid } = useContext(AppContext);
+  const { isLoggedIn, setAndCheckExpiration, setName,setUid,role,setRole } = useContext(AppContext);
   const [accountType, setAccountType] = useState("Patient");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -45,9 +45,10 @@ const SignupForm = () => {
       const data = await response.json();
       setName(formData.FirstName);
       setUid(data.id);
+      setRole(formData.accountType);
       console.log(data.id);
       setAndCheckExpiration(true);
-      if (formData.accountType === "Patient") navigate("/");
+      if (role === "Patient") navigate("/");
       else navigate("/Doctor_UI");
     }
   }

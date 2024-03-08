@@ -24,6 +24,7 @@ function AppContextProvider({ children }) {
   );
 
   const [Uid, setUid] = useState(localStorage.getItem("Uid") || "");
+  const [role,setRole] = useState(localStorage.getItem("role") || "");
 
   // data for appointment
   const [appointmentData, setAppointmentData] = useState({
@@ -46,6 +47,7 @@ function AppContextProvider({ children }) {
     localStorage.setItem("doctor", doctor);
     localStorage.setItem("doctorDate", doctorDate);
     localStorage.setItem("Uid", Uid);
+    localStorage.setItem("role", role);
   }, [
     isLoggedIn,
     state,
@@ -56,6 +58,7 @@ function AppContextProvider({ children }) {
     doctor,
     doctorDate,
     Uid,
+    role,
   ]);
 
   // Function to set and update expiration timestamp
@@ -101,6 +104,8 @@ function AppContextProvider({ children }) {
         setMode, // Add mode and setMode to context value
         appointmentData,
         setAppointmentData,
+        role,
+        setRole,
       }}
     >
       {children}

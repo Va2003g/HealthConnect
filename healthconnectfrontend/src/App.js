@@ -20,6 +20,8 @@ import Book_Appointement_Dates from "./Pages/Book_Appointement/Book_Appointement
 import Book_Appointement_Doctor_Date_Data from "./Components/Home/Book_Appointement/Book_Appointement_Doctor_Date_Data";
 import Book_Appointement_Doctor_Date from "./Pages/Book_Appointement/Book_Appointement_Doctor_Date";
 import Doctor_HomeScreen from "./Pages/DoctorHome/Home/Doctor_HomeScreen";
+import Available_Appointments from "./Components/Doctor_UI/Home/Available_Appointements";
+import Scheduled_Appointements from "./Components/Doctor_UI/Home/scheduled_Appointements";
 
 function App() {
   return (
@@ -67,11 +69,16 @@ function App() {
         ></Route>
         <Route
           path="/Book_Appointement_Doctor_Date_Data"
-          element={<Book_Appointement_Doctor_Date/>}
+          element={<Book_Appointement_Doctor_Date />}
+        ></Route>
+        <Route path="/Doctor_UI" element={<Doctor_HomeScreen />}></Route>
+        <Route
+          path="/Available_Appointments"
+          element={<Available_Appointments />}
         ></Route>
         <Route
-          path="/Doctor_UI"
-          element={<Doctor_HomeScreen/>}
+          path="/scheduled_Appointments"
+          element={<Scheduled_Appointements/>}
         ></Route>
         <Route path="*" element={<Home />} />
       </Routes>

@@ -40,7 +40,7 @@ const Book_Appontement_DoctorsData = () => {
   };
 
   return (
-    <div className="h-[73vh] flex flex-col items-center">
+    <div className="h-[73vh] flex flex-col items-center overflow-scroll">
       <div className="text-2xl text-center mb-4">Select State</div>
       <div className="w-full max-w-[90%]">
         {loading ? (
