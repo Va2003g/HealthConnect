@@ -41,6 +41,7 @@ const Book_Appointement_DatesData = () => {
   };
   const tileClassName = ({ date, view }) => {
     if (
+      !(date.getDate() < new Date().getDate()||date.getDay()===0) &&
       datesToColor.find((coloredDate) => {
         return coloredDate === date.getDate();
       })
@@ -231,6 +232,10 @@ const Book_Appointement_DatesData = () => {
                     tileClassName={tileClassName}
                     minDate={new Date(year, month - 1, 1)}
                     width={100}
+                    tileDisabled={({date})=>{
+                      const todayDate = new Date().getDate()
+                      if(date.getDay()===0 || date.getDate() < todayDate) return true;
+                    }}
                   />
                 </div>
                 <div className="mt-5 ml-[-30px]">
