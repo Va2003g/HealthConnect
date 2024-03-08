@@ -33,7 +33,7 @@ const LoginForm = () => {
       body: JSON.stringify(formData),
     });
     console.log(response);
-
+  
     if (response.ok) {
       const data = await response.json();
       console.log(data);
@@ -41,15 +41,23 @@ const LoginForm = () => {
       setUid(data.id);
       setRole(data.role);
       setAndCheckExpiration(true);
-      if (role === "Patient") navigate("/");
-      else navigate("/Doctor_UI");
+  
+      // Check the role after it's been set
+      if (data.role === "Doctor") {
+        navigate("/Doctor_UI");
+      } else {
+        navigate("/");
+      }
+      console.log("role is " + data.role);
     }
   }
+  
 
   useEffect(() => {
     console.log("Effect triggered. isLoggedIn:", isLoggedIn);
     if (isLoggedIn) {
-      navigate("/");
+      if(role === "patient") navigate("/");
+      else navigate("/Doctor_UI");
     }
   }, [isLoggedIn, navigate]);
 

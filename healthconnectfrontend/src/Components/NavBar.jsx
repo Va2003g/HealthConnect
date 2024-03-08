@@ -9,10 +9,10 @@ const NavBar = () => {
 
   const navigate = useNavigate();
   const homePageRedirect = () => {
-    if (role === "patient") {
-      navigate("/");
-    } else {
+    if (role === "Doctor") {
       navigate("/Doctor_UI");
+    } else {
+      navigate("/");
     }
   };
 

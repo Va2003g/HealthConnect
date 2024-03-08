@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
@@ -7,9 +7,13 @@ import { AppContext } from "../../Context/AppContext";
 
 export default function StaticDatePickerLandscape() {
   const { setDoctorDate, doctor, doctorDate, Uid } = useContext(AppContext);
+  const [tempdate, setTempDate] = useState();
 
   const handleDateChange = async (newValue) => {
-    const formattedDate = newValue.format("YYYY-MM-DD");
+    console.log(newValue);
+
+    const formattedDate = dayjs(tempdate).format('YYYY-MM-DD');
+    setDoctorDate(formattedDate);
     setDoctorDate(formattedDate);
     console.log(formattedDate);
     console.log(doctor);
@@ -47,14 +51,26 @@ export default function StaticDatePickerLandscape() {
   };
 
   return (
-    <div className="h-[73vh] overflow-scroll">
+    <div className="h-[73vh] overflow-scroll flex flex-col">
       <div className="text-2xl text-center">Select Date</div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           orientation="Portrait"
           minDate={dayjs()} // Set minDate to today's date
-          onChange={handleDateChange} // Pass the callback function
+          onChange={(newValue) => setTempDate(newValue)} // Corrected line
+          componentsProps={{
+            actionBar: {
+              actions: [], // Add this line
+            },
+          }}
         />
+
+        <button
+          className="text-center font-semibold font-['Poppins'] mt-[1rem]"
+          onClick={handleDateChange}
+        >
+          Book Appointment
+        </button>
       </LocalizationProvider>
     </div>
   );
