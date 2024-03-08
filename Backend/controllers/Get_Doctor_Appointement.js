@@ -31,6 +31,20 @@ exports.Get_Doctor_Appointement = async (req, res) => {
       });
     }
 
+    const existingAppointment = await DoctorAppointment.findOne({
+      doctor: doctorId,
+      patient: patientId,
+      date: date,
+    });
+
+    if (existingAppointment) {
+      console.log("Appointment already exists for the same user, doctor, and date");
+      return res.status(400).json({
+        success: false,
+        message: "Appointment already exists for the same user, doctor, and date",
+      });
+    }
+
     const newAppointment = await DoctorAppointment.create({
       doctor: doctorId,
       patient: patientId,
