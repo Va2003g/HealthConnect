@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require("./User"); // Assuming Doctor model is defined in Doctor.js
 
 const Doctor_appointmentSchema = new mongoose.Schema({
   patient: {
@@ -11,13 +10,11 @@ const Doctor_appointmentSchema = new mongoose.Schema({
     ref: "User",
     default: null,
   },
-  doctorName: String, // Adding doctorName field
-  speciality: String, // Adding speciality field
   date: Date,
   status: String, // e.g., 'Scheduled', 'Completed', 'Cancelled','Pending'
 });
 
 module.exports = mongoose.model(
-  "Doctor_Appointement",
+  "Doctor_Appointment",
   Doctor_appointmentSchema
 );

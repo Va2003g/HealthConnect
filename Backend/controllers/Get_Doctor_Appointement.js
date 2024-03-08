@@ -1,42 +1,55 @@
-const DoctorAppoint = require("../models/Doctor_Appointement");
-const Doctor = require("../models/User");
+const DoctorAppointment = require("../models/Doctor_Appointement");
+const User = require("../models/User");
 
 exports.Get_Doctor_Appointement = async (req, res) => {
-    try {
-        // Fetching data from request body
-        const { Doc_id, Date } = req.body;
+  try {
+    const { doctorId, patientId, date } = req.body;
 
-        // Find the doctor based on the provided Doc_id
-        const doctor = await Doctor.findById(Doc_id);
-
-        if (!doctor) {
-            return res.status(400).json({
-                success: false,
-                message: "Doctor not found"
-            });
-        }
-
-        // Create a new document using the DoctorAppoint model
-        const newAppointment = await DoctorAppoint.create({
-            doctor: doctor._id,
-            doctorName: doctor.name,
-            speciality: doctor.speciality,
-            date: Date,
-            status: 'Pending', // Set default status if needed
-        });
-
-        console.log(newAppointment); // You can log the appointment here if you need it for debugging
-
-        return res.status(200).json({
-            success: true,
-            message: `Appointment booked successfully for ${doctor.name}`,
-            appointment: newAppointment
-        });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({
-            success: false,
-            message: "Server Error in Booking Appointment"
-        });
+    if (!doctorId || !patientId || !date) {
+      console.log("Provide Complete Details");
+      return res.status(400).json({
+        success: false,
+        message: "Provide Complete Details",
+      });
     }
+
+    const doctor = await User.findById(doctorId);
+    if (!doctor) {
+      console.log("Doctor not found");
+      return res.status(400).json({
+        success: false,
+        message: "Doctor not found",
+      });
+    }
+
+    const patient = await User.findById(patientId);
+    if (!patient) {
+      console.log("Patient not found");
+      return res.status(400).json({
+        success: false,
+        message: "Patient not found",
+      });
+    }
+
+    const newAppointment = await DoctorAppointment.create({
+      doctor: doctorId,
+      patient: patientId,
+      date: date,
+      status: "Pending",
+    });
+
+    console.log(newAppointment);
+
+    return res.status(200).json({
+      success: true,
+      message: `Appointment booked successfully with ${doctor.name} on ${date}`,
+      appointment: newAppointment,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "Server Error in Booking Appointment",
+    });
+  }
 };

@@ -19,9 +19,11 @@ const {
   resetPassword,
 } = require("../controllers/resetPassword");
 
-const { Get_Doctor_Appointement } = require("../controllers/Get_Doctor_Appointement");
+const {
+  Get_Doctor_Appointement,
+} = require("../controllers/Get_Doctor_Appointement");
 router.post("/reset-password-token", resetPasswordToken);
-router.post("/Set_doctor_Appointement" , Get_Doctor_Appointement);
+router.post("/Set_doctor_Appointement", Get_Doctor_Appointement);
 router.put("/reset-password", resetPassword);
 
 //getting hospital data for checking
@@ -50,10 +52,17 @@ const { Get_NearBy_Hospitals } = require("../controllers/Get_NearBy_Hospitals");
 const {
   getAppointmentDateData,
 } = require("../controllers/getAppointmentDateData");
-const {bookAppointment} = require('../controllers/bookAppointment');
+const { bookAppointment } = require("../controllers/bookAppointment");
 const { ShowDoctors } = require("../controllers/Show_Doctors");
-
-
+const {
+  Show_Pending_Doctor_Appointements,
+} = require("../controllers/Show_Pending_Doctor_Appointements");
+const {
+  Show_Accepted_Doctor_Appointements,
+} = require("../controllers/Show_Accepted_Doctor_Appintement");
+const { getUserDetails } = require("../controllers/getUserDetails");
+const { approveAppointement } = require("../controllers/approvePendingAppointements");
+const { rejectAppointement } = require("../controllers/rejectPendingappointement");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
@@ -63,6 +72,19 @@ router.get("/getNearbyHospital", Get_NearBy_Hospitals);
 router.get("/get-all-doc", ShowDoctors);
 router.get("/get-dates", getAppointmentDateData);
 router.post("/book-appointment", bookAppointment);
+router.get(
+  "/show-Doctor-Pending-Appointement",
+  Show_Pending_Doctor_Appointements
+);
+router.get(
+  "/show_Accepted_Doctor_Appointement",
+  Show_Accepted_Doctor_Appointements
+);
+router.get("/get_User_Details", getUserDetails);
+
+router.put("/approveDoctorAppointement",approveAppointement);
+
+router.put("/rejectDoctorAppointement",rejectAppointement);
 
 router.get("/test", authentication, isPatient, (req, res) => {
   return res.status(200).json({
