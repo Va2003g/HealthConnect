@@ -63,6 +63,8 @@ const {
 const { getUserDetails } = require("../controllers/getUserDetails");
 const { approveAppointement } = require("../controllers/approvePendingAppointements");
 const { rejectAppointement } = require("../controllers/rejectPendingappointement");
+const { viewAllDoctorAppointementForPatient } = require("../controllers/viewAllDoctorAppointementForPatient");
+const { viewAllHospitalAppointementForPatient } = require("../controllers/viewAllHospitalAppointementforPatient");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
@@ -79,6 +81,14 @@ router.get(
 router.get(
   "/show_Accepted_Doctor_Appointement",
   Show_Accepted_Doctor_Appointements
+);
+router.get(
+  "/viewAllDoctorAppointementForPatient",
+  viewAllDoctorAppointementForPatient
+);
+router.get(
+  "/viewAllHospitalAppointementForPatient",
+  viewAllHospitalAppointementForPatient
 );
 router.get("/get_User_Details", getUserDetails);
 
