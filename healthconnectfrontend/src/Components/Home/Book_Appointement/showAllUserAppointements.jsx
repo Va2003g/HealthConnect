@@ -46,7 +46,12 @@ const ShowAllUserAppointements = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/viewAllDoctorAppointementForPatient?id=${Uid}`
+        `${process.env.REACT_APP_BACKEND_URL}/viewAllDoctorAppointementForPatient?id=${Uid}`,{
+          method:"GET",
+          header:{
+            "content-type":"application/json"
+          },
+        }
       );
 
       if (!response.ok) {

@@ -39,7 +39,6 @@ exports.login = async (req, res) => {
           Date.now() + 3 * 24 * 60 * 60 * 1000 /*time in millisecond*/
         ),
         httpOnly: true,
-        sameSite:'None',
       };
 
       return res
@@ -47,9 +46,9 @@ exports.login = async (req, res) => {
         .status(200)
         .json({
           success: true,
-          name:existedUser.name,
-          role:existedUser.role,
-          id:existedUser._id,
+          name: existedUser.name,
+          role: existedUser.role,
+          id: existedUser._id,
           message: `${existedUser.name} logged successfully`,
           authToken,
         });

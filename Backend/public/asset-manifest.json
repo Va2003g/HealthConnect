@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3e0afd58.css",
+    "main.js": "/static/js/main.d4410f7a.js",
+    "static/media/Book_Appointement_BackGround.jpeg": "/static/media/Book_Appointement_BackGround.e0ec75b98ae5f8c209b6.jpeg",
+    "static/media/Brand_4.png": "/static/media/Brand_4.d5a000781a972af86fcc.png",
+    "static/media/Brand_5.png": "/static/media/Brand_5.2627efbaf6ccbefeb7cd.png",
+    "static/media/Book_Appointement_ForeGround.jpeg": "/static/media/Book_Appointement_ForeGround.66cdae3486821fefd2d9.jpeg",
+    "static/media/Doctor_Special_Services.png": "/static/media/Doctor_Special_Services.7f35475d4455d2f75748.png",
+    "static/media/Brand_2.png": "/static/media/Brand_2.5126f982e95585d2dcd8.png",
+    "static/media/Brand_1.png": "/static/media/Brand_1.5e702d7366b3ce25862c.png",
+    "static/media/Brand_3.png": "/static/media/Brand_3.d5d7f64c5d177b1471c3.png",
+    "static/media/UserIcon.png": "/static/media/UserIcon.6236fce42dc299aec885.png",
+    "static/media/Login_Image.webp": "/static/media/Login_Image.c9cab5bb201c22e485fc.webp",
+    "static/media/HealthConnectLogo.jpeg": "/static/media/HealthConnectLogo.a725b0445a9cbd609d6c.jpeg",
+    "index.html": "/index.html",
+    "main.3e0afd58.css.map": "/static/css/main.3e0afd58.css.map",
+    "main.d4410f7a.js.map": "/static/js/main.d4410f7a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e0afd58.css",
+    "static/js/main.d4410f7a.js"
+  ]
+}
