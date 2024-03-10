@@ -136,7 +136,7 @@ const Book_Appointement_DatesData = () => {
           'content-type':"application/json"
         },
         body:JSON.stringify(dataForAppointment),
-        credentials: 'include',
+        credentials: '',
       })
       console.log(response);
       console.log(await response.json())
