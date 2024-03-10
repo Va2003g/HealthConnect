@@ -5,10 +5,12 @@ import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import dayjs from "dayjs";
 import { AppContext } from "../../Context/AppContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function StaticDatePickerLandscape() {
   const { setDoctorDate, doctor, doctorDate, Uid } = useContext(AppContext);
   const [tempdate, setTempDate] = useState();
+  const navigate = useNavigate();
 
   const handleDateChange = async (newValue) => {
     console.log(newValue);
@@ -49,6 +51,8 @@ export default function StaticDatePickerLandscape() {
       const responseData = await response.json();
       toast.success(responseData.message);
       console.log(responseData);
+      
+      navigate("/view_Appointments");
     } catch (error) {
       console.error("Error:", error);
     }

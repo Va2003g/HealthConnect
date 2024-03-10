@@ -145,6 +145,7 @@ const Book_Appointement_DatesData = () => {
       {
         setLoading(false)
         toast.success("Appointement Booked Successfully")
+        navigate("/view_Appointments");
       }
     }
     bookingHospital()

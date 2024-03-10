@@ -28,14 +28,6 @@ const NavBar = () => {
           onClick={homePageRedirect}
         />
 
-        <nav className="mt-2">
-          <ul className="flex gap-5 cursor-pointer">
-            <li onClick={homePageRedirect}>Home </li>
-            <li onClick={homePageRedirect}>About </li>
-            <li onClick={homePageRedirect}>Contact</li>
-          </ul>
-        </nav>
-
         <div className="flex mt-2 gap-5 items-center">
           {!isLoggedIn && (
             <Link to="/login">

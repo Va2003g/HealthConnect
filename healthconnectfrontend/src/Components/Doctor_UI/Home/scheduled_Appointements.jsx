@@ -80,7 +80,7 @@ const Scheduled_Appointements = () => {
   }, [Uid]);
 
   return (
-    <div className="h-[73vh] overflow-scroll mx-[2rem]">
+    <div className="h-[84vh] overflow-scroll mx-[2rem]">
       <div className="flex justify-between my-[3rem]">
         <div className="text-2xl">Scheduled Appointements</div>
         <Link to="/Available_Appointments">
