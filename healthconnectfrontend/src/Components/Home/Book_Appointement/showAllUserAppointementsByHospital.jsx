@@ -22,11 +22,11 @@ const ShowAllUserAppointementsByHospital = () => {
           });
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         }
       );
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      // console.log("Geolocation is not supported by this browser.");
     }
   }, []);
 
@@ -119,7 +119,7 @@ const ShowAllUserAppointementsByHospital = () => {
             const HospitalDetails = await fetchHospitalDetails(
               appointment.hospital
             );
-            console.log("Hospital Details ", HospitalDetails);
+            // console.log("Hospital Details ", HospitalDetails);
             const DepartementDetails = await fetchDepartementDetails(
               appointment.department
             );
@@ -143,10 +143,10 @@ const ShowAllUserAppointementsByHospital = () => {
 
   useEffect(() => {
     fetchAppointments();
-  }, [Uid]);
+  }, []);
 
   return (
-    <div className="overflow-auto m-[2rem] h-[84vh]">
+    <div className="m-[2rem]">
       <div>
         {loading ? (
           <div className="w-100 h-[60vh] flex justify-center items-center">

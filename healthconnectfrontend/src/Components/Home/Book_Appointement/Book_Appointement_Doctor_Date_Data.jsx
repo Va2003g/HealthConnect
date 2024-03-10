@@ -47,11 +47,12 @@ export default function StaticDatePickerLandscape() {
         return;
       }
 
-      // Handle response if needed
-      const responseData = await response.json();
-      toast.success(responseData.message);
-      console.log(responseData);
-      
+      if (response.ok) {
+        const responseData = await response.json();
+        toast.success(responseData.message);
+        console.log(responseData);
+      }
+
       navigate("/view_Appointments");
     } catch (error) {
       console.error("Error:", error);

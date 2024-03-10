@@ -22,6 +22,7 @@ const {
 const {
   Get_Doctor_Appointement,
 } = require("../controllers/Get_Doctor_Appointement");
+const { deleteDAppoint } = require("../controllers/deleteDAppoint");
 router.post("/reset-password-token", resetPasswordToken);
 router.post("/Set_doctor_Appointement", Get_Doctor_Appointement);
 router.put("/reset-password", resetPassword);
@@ -61,12 +62,22 @@ const {
   Show_Accepted_Doctor_Appointements,
 } = require("../controllers/Show_Accepted_Doctor_Appintement");
 const { getUserDetails } = require("../controllers/getUserDetails");
-const { approveAppointement } = require("../controllers/approvePendingAppointements");
-const { rejectAppointement } = require("../controllers/rejectPendingappointement");
-const { viewAllDoctorAppointementForPatient } = require("../controllers/viewAllDoctorAppointementForPatient");
-const { viewAllHospitalAppointementForPatient } = require("../controllers/viewAllHospitalAppointementforPatient");
+const {
+  approveAppointement,
+} = require("../controllers/approvePendingAppointements");
+const {
+  rejectAppointement,
+} = require("../controllers/rejectPendingappointement");
+const {
+  viewAllDoctorAppointementForPatient,
+} = require("../controllers/viewAllDoctorAppointementForPatient");
+const {
+  viewAllHospitalAppointementForPatient,
+} = require("../controllers/viewAllHospitalAppointementforPatient");
 const { getHospitalDetails } = require("../controllers/getHospitalDetails");
-const { getDepartementDetails } = require("../controllers/getDepartementDetails");
+const {
+  getDepartementDetails,
+} = require("../controllers/getDepartementDetails");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
@@ -92,13 +103,15 @@ router.get(
   "/viewAllHospitalAppointementForPatient",
   viewAllHospitalAppointementForPatient
 );
+
+router.delete("/deleteDAppoint", deleteDAppoint);
 router.get("/get_User_Details", getUserDetails);
 router.get("/get_Hospital_Details", getHospitalDetails);
 router.get("/get_Departement_Details", getDepartementDetails);
 
-router.put("/approveDoctorAppointement",approveAppointement);
+router.put("/approveDoctorAppointement", approveAppointement);
 
-router.put("/rejectDoctorAppointement",rejectAppointement);
+router.put("/rejectDoctorAppointement", rejectAppointement);
 
 router.get("/test", authentication, isPatient, (req, res) => {
   return res.status(200).json({
