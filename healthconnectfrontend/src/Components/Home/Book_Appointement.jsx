@@ -58,19 +58,19 @@ const Book_Appointement = () => {
 
           <div className="">
             <div className="text-sky-700 text-3xl font-bold font-['Poppins']">
-              100+
+              30000+
             </div>
             <div className="w-[51.78px] text-stone-300 font-semibold font-['Poppins']">
-              Active Doctors
+              Active Hospitals
             </div>
           </div>
 
           <div>
             <div className="text-sky-700 text-3xl font-bold font-['Poppins']">
-              100+
+              1000+
             </div>
             <div className="w-[51.78px] text-stone-300 font-semibold font-['Poppins']">
-              Active Doctors
+              Active Users
             </div>
           </div>
         </div>
