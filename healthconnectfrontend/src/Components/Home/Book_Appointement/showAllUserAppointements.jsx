@@ -28,16 +28,16 @@ const ShowAllUserAppointements = () => {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data && data.data) {
         return data.data.name;
       } else {
-        console.error("Error: Patient name not found");
+        // console.error("Error: Patient name not found");
         return ""; // Set an empty string as a placeholder
       }
     } catch (err) {
-      console.error("Error fetching patient details:", err);
+      // console.error("Error fetching patient details:", err);
       return ""; // Set an empty string on error (optional)
     }
   };
@@ -46,37 +46,38 @@ const ShowAllUserAppointements = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/viewAllDoctorAppointementForPatient?id=${Uid}`,{
-          method:"GET",
-          header:{
-            "content-type":"application/json"
+        `${process.env.REACT_APP_BACKEND_URL}/viewAllDoctorAppointementForPatient?id=${Uid}`,
+        {
+          method: "GET",
+          header: {
+            "content-type": "application/json",
           },
         }
       );
 
       if (!response.ok) {
         const data = await response.json();
-        console.log(data.message);
+        // console.log(data.message);
         throw new Error(`Error fetching Appointments: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data && data.Data) {
         const appointmentsWithPatientDetails = await Promise.all(
           data.Data.map(async (appointment) => {
             const patientDetails = await fetchPatientDetails(
-              appointment.patient
+              appointment.doctor
             );
             return { ...appointment, patientDetails };
           })
         );
         setAppointments(appointmentsWithPatientDetails);
       } else {
-        console.error("Error: Appointments not found");
+        // console.error("Error: Appointments not found");
       }
     } catch (err) {
-      console.error("Error fetching Appointments:", err);
+      // console.error("Error fetching Appointments:", err);
     } finally {
       setLoading(false); // Ensure loading state is set to false even on errors
     }
@@ -87,11 +88,7 @@ const ShowAllUserAppointements = () => {
   }, [Uid]);
 
   return (
-    <div className="overflow-scroll m-[2rem] h-[84vh]">
-        <div className="text-2xl text-center">Scheduled Appointements</div>
-      
-      <div>
-      <div className="text-2xl text-center my-5">Appointements as Per Doctor</div>
+    <div className="overflow-auto m-[2rem] h-[84vh]">
         {loading ? (
           <div className="w-100 h-[60vh] flex justify-center items-center">
             <SpinningCircles color="#4299e1" fill="#4299e1" />
@@ -105,14 +102,13 @@ const ShowAllUserAppointements = () => {
               <div>
                 <div>Date: {formatDate(appointment.date)}</div>
                 <div>
-                  Patient: {appointment.patientDetails || "Name Unavailable"}
+                  Doctor: {appointment.patientDetails || "Name Unavailable"}
                 </div>
               </div>
             </div>
           ))
         )}
       </div>
-    </div>
   );
 };
 

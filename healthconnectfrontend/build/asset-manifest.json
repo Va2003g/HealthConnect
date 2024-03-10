@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.3e0afd58.css",
-    "main.js": "/static/js/main.d1057f74.js",
+    "main.js": "/static/js/main.1a2d868f.js",
     "static/media/Book_Appointement_BackGround.jpeg": "/static/media/Book_Appointement_BackGround.e0ec75b98ae5f8c209b6.jpeg",
     "static/media/Brand_4.png": "/static/media/Brand_4.d5a000781a972af86fcc.png",
     "static/media/Brand_5.png": "/static/media/Brand_5.2627efbaf6ccbefeb7cd.png",
@@ -15,10 +15,10 @@
     "static/media/HealthConnectLogo.jpeg": "/static/media/HealthConnectLogo.a725b0445a9cbd609d6c.jpeg",
     "index.html": "/index.html",
     "main.3e0afd58.css.map": "/static/css/main.3e0afd58.css.map",
-    "main.d1057f74.js.map": "/static/js/main.d1057f74.js.map"
+    "main.1a2d868f.js.map": "/static/js/main.1a2d868f.js.map"
   },
   "entrypoints": [
     "static/css/main.3e0afd58.css",
-    "static/js/main.d1057f74.js"
+    "static/js/main.1a2d868f.js"
   ]
 }
