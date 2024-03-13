@@ -25,10 +25,7 @@ const Book_Appointement_HospitalData = () => {
   }
 
   useEffect(() => {
-    async function fetchData() {
-      await getHospital();
-    }
-    fetchData();
+      getHospital();
   }, [state, district]);
 
   useEffect(() => {
