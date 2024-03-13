@@ -17,16 +17,11 @@ export default function StaticDatePickerLandscape() {
 
     const formattedDate = dayjs(tempdate).format("YYYY-MM-DD");
     setDoctorDate(formattedDate);
-    setDoctorDate(formattedDate);
-    console.log(formattedDate);
-    console.log(doctor);
     const data = {
       doctorId: doctor,
       patientId: Uid,
       date: formattedDate, // Use newValue which is the updated date
     };
-
-    console.log(data);
 
     try {
       const response = await fetch(
