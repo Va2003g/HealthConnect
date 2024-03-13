@@ -67,12 +67,15 @@ Health Connect is a MERN (MongoDB, Express.js, React, Node.js) project that faci
 5.  **Navigate to Backend:**
    ```bash
    cd Backend
+   ```
 6. **Install dependencies:**
     ```bash
     npm install
+    ```
 7.  **Run the Backend application:**
     ```bash
-    npm run start  
+    npm run start 
+    ``` 
 
 ## Usage
 
@@ -94,11 +97,4 @@ Health Connect is a MERN (MongoDB, Express.js, React, Node.js) project that faci
 ---
 
 Thank you for using Health Connect. Whether you're a developer or a user, we hope this application enhances your healthcare experience. If you have any questions or encounter issues, feel free to reach out. Stay healthy!
-
-
-
-
-
-
-
 
