@@ -135,13 +135,13 @@ const ShowAllUserAppointements = () => {
               {/* {console.log(appointment._id)} */}
             </div>
             <div
-                className="px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]"
-                onClick={() => handleDelete(appointment._id)}
-              >
-                <div className="text-center text-white font-semibold font-['Poppins']">
-                  Cancel Appointment
-                </div>
+              className="px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]"
+              onClick={() => handleDelete(appointment._id)}
+            >
+              <div className="text-center text-white font-semibold font-['Poppins']">
+                Cancel Appointment
               </div>
+            </div>
           </div>
         ))
       )}

@@ -78,6 +78,7 @@ const { getHospitalDetails } = require("../controllers/getHospitalDetails");
 const {
   getDepartementDetails,
 } = require("../controllers/getDepartementDetails");
+const { deleteHospitalAppointment } = require("../controllers/deleteHospitalAppointment");
 
 // router.get('/get-hospital-data',authentication,getHospitalData);
 router.get("/get-hospital-data", getHospitalData);
@@ -105,6 +106,7 @@ router.get(
 );
 
 router.delete("/deleteDAppoint", deleteDAppoint);
+router.delete("/deleteHospitalAppointment",deleteHospitalAppointment)
 router.get("/get_User_Details", getUserDetails);
 router.get("/get_Hospital_Details", getHospitalDetails);
 router.get("/get_Departement_Details", getDepartementDetails);
