@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { SpinningCircles } from "react-loading-icons";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ShowAllUserAppointementsByHospital = () => {
@@ -201,27 +201,28 @@ const ShowAllUserAppointementsByHospital = () => {
                   {appointment.DepartementDetails || "Name Unavailable"}
                 </div>
               </div>
-              {appointment.HospitalDetails.Location_Coordinates && (
-                <div className="flex gap-4 items-baseline">
-                  <a
-                    href={`https://www.google.com/maps/dir/${location.latitude},${location.longitude}/${appointment.HospitalDetails.Location_Coordinates}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className=" text-blue-500 hover:underline"
-                  >
-                    Get Directions
-                  </a>
-
-                  <div
-                    className="px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]"
-                    onClick={() => handleDelete(appointment._id)}
-                  >
-                    <div className="text-center text-white font-semibold font-['Poppins']">
-                      Cancel Appointment
-                    </div>
+              <div className="flex gap-4 items-baseline">
+                {appointment.HospitalDetails.Location_Coordinates && (
+                  <div>
+                    <a
+                      href={`https://www.google.com/maps/dir/${location.latitude},${location.longitude}/${appointment.HospitalDetails.Location_Coordinates}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className=" text-blue-500 hover:underline"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
+                )}
+                <div
+                  className="px-[20.51px] py-[7.69px] bg-gradient-to-r from-teal-300 to-sky-700 rounded-[19.99px] shadow gap-[5.13px]"
+                  onClick={() => handleDelete(appointment._id)}
+                >
+                  <div className="text-center text-white font-semibold font-['Poppins']">
+                    Cancel Appointment
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           ))
         )}
