@@ -18,8 +18,8 @@ exports.resetPasswordToken = async (req,res)=>
         let time = Date.now() + 1*60*1000;
         let id = findUser._id + '.' + time;
         console.log(id);
-        // const url = `https://healthconnect-e0t5.onrender.com/Reset_Password/${id}`;
-        const url = `https://healthconnect-e0t5.onrender.com/login?reset-token=${id}`;
+        const url = `https://healthconnect-e0t5.onrender.com/Reset_Password/${id}`;
+        //const url = `https://healthconnect-e0t5.onrender.com/login?reset-token=${id}`;
 
         const emailBody = `Hi ${findUser.name},<br><br>Kindly click this <a href="${url}">link</a> to reset your password.`;
         await sendMail(email, 'Reset Password', emailBody);
