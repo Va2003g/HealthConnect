@@ -21,11 +21,39 @@ const SignupForm = () => {
   });
 
   function changeHandler(event) {
-    setFormData((prevData) => ({
-      ...prevData,
-      [event.target.name]: event.target.value,
-    }));
+    const { name, value } = event.target;
+  
+    if (name === "FirstName" || name === "LastName") {
+      const regex = /^[A-Za-z]+$/;
+      if (value === "" || regex.test(value)) { 
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        console.log("passes");
+      }
+    } else if (name === "Email") {
+      const emailRegex = /^[A-Za-z0-9@.]+$/;
+      if (value === "" || emailRegex.test(value)) { 
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        console.log("email passes");
+      }
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   }
+  // function changeHandler(event) {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [event.target.name]: event.target.value,
+  //   }));
+  // }
 
   async function submitHandler(event) {
     console.log(formData);

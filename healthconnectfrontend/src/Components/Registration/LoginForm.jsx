@@ -17,10 +17,23 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   function changeHandler(event) {
-    setFormData((prevData) => ({
-      ...prevData,
-      [event.target.name]: event.target.value,
-    }));
+    const {name,value} = event.target;
+    if (name === "email") {
+      const emailRegex = /^[A-Za-z0-9@.]+$/;
+      if (value === "" || emailRegex.test(value)) { 
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        console.log("email passes");
+      }
+    }
+    else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   }
 
   async function submitHandler(event) {
