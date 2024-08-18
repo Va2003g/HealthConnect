@@ -38,7 +38,7 @@ const Latest_News = () => {
     if (data) {
       // Filter out articles with a non-null urlToImage
       const filteredNews = data.filter(
-        (article) => article.urlToImage !== null
+        (article) => article.urlToImage === null
       );
       setNewsToShow(filteredNews);
     }
